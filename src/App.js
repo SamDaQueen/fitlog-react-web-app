@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter>
       <div className="container">
         <Routes>
-          <Route path="/fitlog/*" element={<FitLog />}></Route>
+          <Route path="/*" element={<FitLog />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

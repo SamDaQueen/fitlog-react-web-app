@@ -4,6 +4,7 @@ import {
   faHouseFire,
   faUserNinja,
   faDumbbell,
+  faRectangleList,
 } from "@fortawesome/free-solid-svg-icons";
 
 const NavigationBar = () => {
@@ -14,7 +15,7 @@ const NavigationBar = () => {
   return (
     <div className="list-group">
       <Link
-        to={"/fitlog/home"}
+        to={"/home"}
         className={`list-group-item ${
           active === "home" || active === "fitlog" ? "active" : ""
         }`}
@@ -24,15 +25,23 @@ const NavigationBar = () => {
       </Link>
 
       <Link
-        to={"/fitlog/explore"}
-        className={`list-group-item ${active === "explore" ? "active" : ""}`}
+        to={"/search"}
+        className={`list-group-item ${active === "search" ? "active" : ""}`}
       >
         <FontAwesomeIcon icon={faDumbbell} className="me-2" />
         <span className="d-none d-xl-inline">Explore</span>
       </Link>
 
       <Link
-        to={"/fitlog/profile"}
+        to={"/my-plan"}
+        className={`list-group-item ${active === "my-plan" ? "active" : ""}`}
+      >
+        <FontAwesomeIcon icon={faRectangleList} className="me-2" />
+        <span className="d-none d-xl-inline">My Plan</span>
+      </Link>
+
+      <Link
+        to={"/profile"}
         className={`list-group-item ${active === "profile" ? "active" : ""}`}
       >
         <FontAwesomeIcon icon={faUserNinja} className="me-2" />

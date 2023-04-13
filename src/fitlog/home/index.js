@@ -1,5 +1,5 @@
 import React from "react";
-import WorkoutPage from "../workouts";
+import ActivityList from "../activities";
 import HeroComponent from "./hero.js";
 
 const HomeComponent = () => {
@@ -7,7 +7,7 @@ const HomeComponent = () => {
     <>
       <h2>Home</h2>
       <HeroComponent />
-      <WorkoutPage />
+      <ActivityList />
     </>
   );
 };

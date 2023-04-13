@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "message": "John has added Bench Press to their plan!",
+    "liked": true,
+    "disliked": false,
+    "fired": false
+  },
+  {
+    "id": 2,
+    "message": "Jenny has added Squat to their plan!",
+    "liked": false,
+    "disliked": true,
+    "fired": false
+  },
+  {
+    "id": 3,
+    "message": "Jiya did bench press for 5 reps!",
+    "liked": false,
+    "disliked": false,
+    "fired": true
+  },
+  {
+    "id": 4,
+    "message": "Jenny did squat for 5 reps!",
+    "liked": false,
+    "disliked": false,
+    "fired": true
+  }
+]
