@@ -6,11 +6,6 @@ export const findExercisesThunk = createAsyncThunk(
   async () => await service.findExercises()
 );
 
-export const findExercisesWithPaginationThunk = createAsyncThunk(
-  "workouts/findWorkoutsWithPagination",
-  async (offset) => await service.findExercisesWithPagination(offset)
-);
-
 export const findExercisesByQueryThunk = createAsyncThunk(
   "workouts/findWorkoutsByQuery",
   async (query) => await service.findExercisesByQuery(query)

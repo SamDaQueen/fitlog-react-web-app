@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const EXERCISE_API = "https://api.api-ninjas.com/v1/exercises";
-const API_KEY = "6WUTGZhcuheC7UJUIjyYzA==hRS8n2wpZkkV0RH8";
+const EXERCISE_API = process.env.REACT_APP_EXERCISE_API;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const findExercises = async () => {
   try {
@@ -14,22 +14,6 @@ export const findExercises = async () => {
   } catch (error) {
     console.error("Request failed:", error);
     throw error;
-  }
-};
-
-export const findExercisesWithPagination = async (offset) => {
-  try {
-    const request = `${EXERCISE_API}?offset=${offset}`;
-    console.log("request", request);
-    const response = await axios.get(request, {
-      headers: {
-        "X-Api-Key": API_KEY,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Request failed:", error);
-    return error;
   }
 };
 
