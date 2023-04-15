@@ -6,6 +6,11 @@ import {
 
 const initialState = {
   workouts: [],
+  loading: false,
+  error: null,
+  count: 0,
+  next: null,
+  previous: null,
 };
 
 const workoutsSlice = createSlice({
@@ -19,7 +24,10 @@ const workoutsSlice = createSlice({
     },
     [findExercisesThunk.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.workouts = payload;
+      state.workouts = payload.data;
+      state.count = payload.count;
+      state.next = payload.next;
+      state.previous = payload.previous;
     },
 
     [findExercisesThunk.rejected]: (state, action) => {

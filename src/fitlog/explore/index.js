@@ -25,7 +25,7 @@ const ExploreComponent = () => {
 
   const handleSearch = () => {
     sessionStorage.setItem("page", "1");
-    if (!search) {
+    if (!search || search === "") {
       navigate(`/search`);
       dispatch(findExercisesThunk());
       return;

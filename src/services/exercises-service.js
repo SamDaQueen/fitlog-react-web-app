@@ -5,7 +5,26 @@ const IMAGE_API = "https://wger.de/";
 
 export const findExercises = async () => {
   const response = await axios.get(EXERCISE_API);
-  return response.data;
+  return {
+    count: response.data.count,
+    next: response.data.next,
+    previous: response.data.previous,
+    data: response.data.results.map((result) => {
+      let imageUrl =
+        result.images.length && result.images[0].image
+          ? result.images[0].image
+          : null;
+      if (imageUrl && !imageUrl.startsWith(IMAGE_API)) {
+        imageUrl = IMAGE_API + imageUrl;
+      }
+      return {
+        id: result.id,
+        name: result.name,
+        category: result.category.name,
+        image: imageUrl,
+      };
+    }),
+  };
 };
 
 export const findExercisesByTerm = async (term) => {
