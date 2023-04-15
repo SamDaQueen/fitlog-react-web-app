@@ -27,6 +27,27 @@ export const findExercises = async () => {
   };
 };
 
+export const findExerciseById = async (id) => {
+  const response = await axios.get(`${EXERCISE_API}/${id}`);
+  const result = response.data;
+  return {
+    id: result.id,
+    name: result.name,
+    description: result.description,
+    category: result.category.name,
+    muscles: result.muscles
+      .filter((muscle) => muscle.name_en !== "")
+      .map((muscle) => muscle.name_en),
+    equipment: result.equipment
+      .filter((equipment) => equipment.name !== "")
+      .map((equipment) => equipment.name),
+    images: result.images
+      .filter((image) => image.image !== "")
+      .map((image) => image.image),
+    language: result.language.full_name,
+  };
+};
+
 export const findExercisesByTerm = async (term) => {
   const request = `${EXERCISE_API}search/?term=${term}`;
   const response = await axios.get(request);

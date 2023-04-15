@@ -1,18 +1,19 @@
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
 import { Route, Routes } from "react-router";
+import DetailsComponent from "./details";
 import ExploreComponent from "./explore";
 import Header from "./header";
 import HomeComponent from "./home";
 import MyPlanComponent from "./my-plan";
 import NavigationBar from "./navigation-bar";
 import ProfileComponent from "./profile";
-import { Provider } from "react-redux";
-import workoutsReducer from "./reducers/workouts-reducer";
-import { configureStore } from "@reduxjs/toolkit";
 import activitiesReducer from "./reducers/activities-reducer";
+import exercisesReducer from "./reducers/exercises-reducer";
 
 const store = configureStore({
   reducer: {
-    workouts: workoutsReducer,
+    exercises: exercisesReducer,
     activities: activitiesReducer,
   },
 });
@@ -29,7 +30,8 @@ const FitLog = () => {
           <Routes>
             <Route path="/" element={<HomeComponent />} />
             <Route path="home" element={<HomeComponent />} />
-            <Route path="search/*" element={<ExploreComponent />} />
+            <Route path="search" element={<ExploreComponent />} />
+            <Route path="exercise/:id" element={<DetailsComponent />} />
             <Route path="search/:searchTerm" element={<ExploreComponent />} />
             <Route path="my-plan" element={<MyPlanComponent />} />
             <Route path="profile" element={<ProfileComponent />} />

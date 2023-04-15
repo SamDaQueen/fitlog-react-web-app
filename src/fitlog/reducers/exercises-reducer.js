@@ -5,7 +5,7 @@ import {
 } from "../../services/exercises-thunk";
 
 const initialState = {
-  workouts: [],
+  exercises: [],
   loading: false,
   error: null,
   count: 0,
@@ -13,18 +13,18 @@ const initialState = {
   previous: null,
 };
 
-const workoutsSlice = createSlice({
-  name: "workouts",
+const exercisesSlice = createSlice({
+  name: "exercises",
   initialState,
   reducers: {},
   extraReducers: {
     [findExercisesThunk.pending]: (state) => {
       state.loading = true;
-      state.workouts = [];
+      state.exercises = [];
     },
     [findExercisesThunk.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.workouts = payload.data;
+      state.exercises = payload.data;
       state.count = payload.count;
       state.next = payload.next;
       state.previous = payload.previous;
@@ -36,11 +36,11 @@ const workoutsSlice = createSlice({
     },
     [findExercisesByTermThunk.pending]: (state) => {
       state.loading = true;
-      state.workouts = [];
+      state.exercises = [];
     },
     [findExercisesByTermThunk.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.workouts = payload;
+      state.exercises = payload;
     },
     [findExercisesByTermThunk.rejected]: (state, action) => {
       state.loading = false;
@@ -49,4 +49,4 @@ const workoutsSlice = createSlice({
   },
 });
 
-export default workoutsSlice.reducer;
+export default exercisesSlice.reducer;

@@ -1,16 +1,15 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import WorkoutCard from "./workout-card.js";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import ExercisesCard from "./exercises-card.js";
 
-const WorkoutList = (props) => {
-  const inPlan = props.page !== "explore";
-  const { workouts, loading, error } = useSelector((state) => state.workouts);
-
-  const page = parseInt(sessionStorage.getItem("page")) || 1;
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+const ExerciseList = () => {
+  const { exercises, loading, error } = useSelector((state) => state.exercises);
+  //
+  // const page = parseInt(sessionStorage.getItem("page")) || 1;
+  //
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
   // const updatePage = (page) => {
   //   let query = sessionStorage.getItem("query") || "";
@@ -39,17 +38,23 @@ const WorkoutList = (props) => {
       {/*  handlePageChange={handlePageChange}*/}
       {/*/>*/}
       {error && <li className="list-group-item">An error occurred.</li>}
-      {!loading && workouts.length === 0 && (
-        <li className="list-group-item">No workouts found</li>
+      {!loading && exercises.length === 0 && (
+        <li className="list-group-item">No exercises found</li>
       )}
       {loading && <li className="list-group-item">Loading...</li>}
       {!loading &&
-        workouts.length > 0 &&
-        workouts.map((workout) => (
-          <WorkoutCard key={workout.id} workout={workout} inPlan={inPlan} />
+        exercises.length > 0 &&
+        exercises.map((exercise) => (
+          <Link
+            key={exercise.id}
+            className="no-decoration"
+            to={`/exercise/${exercise.id}`}
+          >
+            <ExercisesCard exercise={exercise} />
+          </Link>
         ))}
     </div>
   );
 };
 
-export default WorkoutList;
+export default ExerciseList;

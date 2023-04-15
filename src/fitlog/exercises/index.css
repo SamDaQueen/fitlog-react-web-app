@@ -1,3 +1,8 @@
+.no-decoration {
+    text-decoration: none;
+    color: black;
+}
+
 .card-text {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -6,12 +11,13 @@
     -webkit-box-orient: vertical;
 }
 
-.workout-card {
+.exercise-card {
     height: 150px;
     display: flex;
 }
 
-.workout-card img {
+.exercise-card img {
     height: 150px;
     width: 150px;
 }
+

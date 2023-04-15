@@ -5,7 +5,7 @@ import {
   findExercisesByTermThunk,
   findExercisesThunk,
 } from "../../services/exercises-thunk";
-import WorkoutList from "../workouts";
+import ExerciseList from "../exercises";
 import SearchBar from "./search-bar";
 
 const ExploreComponent = () => {
@@ -46,7 +46,7 @@ const ExploreComponent = () => {
         setSearch={setSearch}
         handleSearch={handleSearch}
       />
-      <WorkoutList page="explore" />
+      <ExerciseList page="explore" />
     </>
   );
 };

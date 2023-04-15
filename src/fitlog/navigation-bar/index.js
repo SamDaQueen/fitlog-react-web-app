@@ -1,23 +1,27 @@
-import { Link, useLocation } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faHouseFire,
-  faUserNinja,
   faDumbbell,
+  faHouseFire,
   faRectangleList,
+  faUserNinja,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, useLocation } from "react-router-dom";
 
 const NavigationBar = () => {
   const { pathname } = useLocation();
   const paths = pathname.split("/").filter((p) => p !== "");
   const active = paths[paths.length - 1];
 
+  console.log("active", active);
+
   return (
     <div className="list-group">
       <Link
         to={"/home"}
         className={`list-group-item ${
-          active === "home" || active === "fitlog" ? "active" : ""
+          active === "home" || active === "fitlog" || active === undefined
+            ? "active"
+            : ""
         }`}
       >
         <FontAwesomeIcon icon={faHouseFire} className="me-2" />
