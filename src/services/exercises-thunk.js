@@ -6,11 +6,6 @@ export const findExercisesThunk = createAsyncThunk(
   async () => await service.findExercises()
 );
 
-export const findExercisesByQueryThunk = createAsyncThunk(
-  "workouts/findWorkoutsByQuery",
-  async (query) => await service.findExercisesByQuery(query)
-);
-
 export const findExercisesByTermThunk = createAsyncThunk(
   "workouts/findWorkoutsByTerm",
   async (term) => await service.findExercisesByTerm(term)

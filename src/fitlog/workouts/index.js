@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import WorkoutCard from "./workout-card.js";
@@ -45,8 +45,8 @@ const WorkoutList = (props) => {
       {loading && <li className="list-group-item">Loading...</li>}
       {!loading &&
         workouts.length > 0 &&
-        workouts.map((workout, index) => (
-          <WorkoutCard key={index} workout={workout} inPlan={inPlan} />
+        workouts.map((workout) => (
+          <WorkoutCard key={workout.id} workout={workout} inPlan={inPlan} />
         ))}
     </div>
   );

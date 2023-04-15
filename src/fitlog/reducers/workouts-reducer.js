@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  findExercisesByQueryThunk,
   findExercisesByTermThunk,
   findExercisesThunk,
 } from "../../services/exercises-thunk";
@@ -24,18 +23,6 @@ const workoutsSlice = createSlice({
     },
 
     [findExercisesThunk.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.error;
-    },
-    [findExercisesByQueryThunk.pending]: (state) => {
-      state.loading = true;
-      state.workouts = [];
-    },
-    [findExercisesByQueryThunk.fulfilled]: (state, { payload }) => {
-      state.loading = false;
-      state.workouts = payload;
-    },
-    [findExercisesByQueryThunk.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.error;
     },
