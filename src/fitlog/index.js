@@ -30,6 +30,7 @@ const FitLog = () => {
             <Route path="/" element={<HomeComponent />} />
             <Route path="home" element={<HomeComponent />} />
             <Route path="search/*" element={<ExploreComponent />} />
+            <Route path="search/:searchTerm" element={<ExploreComponent />} />
             <Route path="my-plan" element={<MyPlanComponent />} />
             <Route path="profile" element={<ProfileComponent />} />
             <Route path="edit-profile" element={<h2>Hello</h2>} />

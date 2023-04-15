@@ -49,6 +49,7 @@ const WorkoutCard = ({
 }) => {
   const color = colorMap[difficulty];
   const done = false;
+  const image_url = "https://picsum.photos/200/200";
 
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -57,56 +58,19 @@ const WorkoutCard = ({
   };
 
   return (
-    <Card className="mb-2">
-      <Card.Body>
-        <Row>
-          <Col xs={9}>
-            <Card.Title onClick={toggleExpand}>{name}</Card.Title>
-            <Card.Text
-              className={isExpanded ? "" : "CardText"}
-              onClick={toggleExpand}
-            >
-              {instructions}
-            </Card.Text>
-          </Col>
-          <Col xs={3}>
-            <div className="d-flex flex-column align-items-end">
-              {type && (
-                <div className="d-flex align-items-center mb-2">
-                  <span className="me-2">{typeIcons[type]}</span>
-                  <span>{type}</span>
-                </div>
-              )}
-              {muscle && (
-                <div className="d-flex align-items-center mb-2">
-                  <span className="me-2">{muscleIcons[muscle]}</span>
-                  <span>{muscle}</span>
-                </div>
-              )}
-              {equipment && (
-                <div className="d-flex align-items-center mb-2">
-                  <span className="me-2">
-                    <FaDumbbell />
-                  </span>
-                  <span>{equipment}</span>
-                </div>
-              )}
-              {difficulty && (
-                <div>
-                  <FontAwesomeIcon
-                    icon={faSplotch}
-                    className={`text-${color}`}
-                  />{" "}
-                  <span className={`text-${color} ml-2`}>{difficulty}</span>
-                </div>
-              )}
-            </div>
-          </Col>
-        </Row>
-        {!inPlan && <AddComponent />}
-        {inPlan && <SetsReps done={done} />}
-      </Card.Body>
-    </Card>
+    <div className="card  mb-3">
+      <div className="row workout-card g-0">
+        <div className="col-md-3">
+          <img src={image_url} className="rounded-start" alt={name} />
+        </div>
+        <div className="col-md-9">
+          <div className="card-body ">
+            <h5 className="card-title">{name}</h5>
+            <p className="card-text">{instructions}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
