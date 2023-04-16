@@ -2,22 +2,23 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { findExerciseById } from "../../services/exercises-service";
+import { findExerciseById } from "../../services/exercises/exercises-service";
 import "./index.css";
 
-const DetailsComponent = () => {
+const DetailsScreen = () => {
   const { id } = useParams();
   const [details, setDetails] = useState([]);
   const navigate = useNavigate();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getResponse = async () => {
     const response = await findExerciseById(id);
     setDetails(response);
   };
 
   useEffect(() => {
-    getResponse();
-  }, []);
+    getResponse().then((r) => console.log(r));
+  }, [getResponse]);
 
   function handleBack() {
     navigate(-1);
@@ -88,4 +89,4 @@ const DetailsComponent = () => {
     </>
   );
 };
-export default DetailsComponent;
+export default DetailsScreen;

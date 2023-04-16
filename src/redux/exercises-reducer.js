@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   findExercisesByTermThunk,
   findExercisesThunk,
-} from "../../services/exercises-thunk";
+} from "../services/exercises/exercises-thunks";
 
 const initialState = {
   exercises: [],

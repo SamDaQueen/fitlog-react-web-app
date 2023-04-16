@@ -4,11 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   findExercisesByTermThunk,
   findExercisesThunk,
-} from "../../services/exercises-thunk";
+} from "../../services/exercises/exercises-thunks";
 import ExerciseList from "../exercises";
 import SearchBar from "./search-bar";
 
-const ExploreComponent = () => {
+const ExploreScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { searchTerm } = useParams();
@@ -50,4 +50,4 @@ const ExploreComponent = () => {
     </>
   );
 };
-export default ExploreComponent;
+export default ExploreScreen;
