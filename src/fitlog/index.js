@@ -8,7 +8,6 @@ import DetailsScreen from "./screens/details";
 import ExploreScreen from "./screens/explore";
 import HomeScreen from "./screens/home";
 import LoginScreen from "./screens/login";
-import MyPlanComponent from "./screens/my-plan";
 import ProfileScreen from "./screens/profile";
 import RegisterScreen from "./screens/register";
 
@@ -28,7 +27,6 @@ const FitLog = () => {
               <Route path="search" element={<ExploreScreen />} />
               <Route path="exercise/:id" element={<DetailsScreen />} />
               <Route path="search/:searchTerm" element={<ExploreScreen />} />
-              <Route path="my-plan" element={<MyPlanComponent />} />
               <Route path="profile" element={<ProfileScreen />} />
               <Route path="profile/:username" element={<ProfileScreen />} />
               <Route path="login" element={<LoginScreen />} />

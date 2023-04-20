@@ -46,7 +46,7 @@ const ExploreScreen = () => {
         setSearch={setSearch}
         handleSearch={handleSearch}
       />
-      <ExerciseList page="explore" />
+      <ExerciseList />
     </>
   );
 };

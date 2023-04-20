@@ -7,7 +7,7 @@ const AddComponent = () => {
   return (
     <>
       <Button variant="primary" size="sm">
-        <FontAwesomeIcon icon={faPlus} /> Add this to my plan
+        <FontAwesomeIcon icon={faPlus} /> Add this to your plan
       </Button>
     </>
   );

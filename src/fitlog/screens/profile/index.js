@@ -5,8 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { findExercisesByUserId } from "../../../services/plan/plan-service";
 import { findUserByUsername } from "../../../services/users/users-service";
 import { logoutThunk } from "../../../services/users/users-thunks";
+import MyPlanComponent from "../../components/my-plan";
 import "./index.css";
 
 const ProfileScreen = () => {
@@ -14,6 +16,7 @@ const ProfileScreen = () => {
   const { currentUser } = useSelector((state) => state.users);
   const [profile, setProfile] = useState(currentUser);
   const [owner, setOwner] = useState(false);
+  const [exercises, setExercises] = useState([]);
 
   const monthNames = [
     "January",
@@ -38,16 +41,27 @@ const ProfileScreen = () => {
     if (user) {
       setProfile(user);
       setOwner(false);
+      await findPlansForUser(user._id);
+    }
+  };
+
+  const findPlansForUser = async (id) => {
+    const plans = await findExercisesByUserId(id);
+    setExercises(plans);
+  };
+
+  const loadProfile = async () => {
+    if (username) {
+      await fetchUserProfile();
+    } else {
+      setProfile(currentUser);
+      setOwner(true);
+      await findPlansForUser(currentUser._id);
     }
   };
 
   useEffect(() => {
-    if (username) {
-      fetchUserProfile();
-      return;
-    }
-    setProfile(currentUser);
-    setOwner(true);
+    loadProfile();
   }, [currentUser, username]);
 
   let date = new Date();
@@ -135,6 +149,7 @@ const ProfileScreen = () => {
           </div>
         </div>
       )}
+      {profile && <MyPlanComponent owner={owner} exercises={exercises} />}
     </>
   );
 };

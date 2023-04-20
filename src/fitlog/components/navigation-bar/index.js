@@ -3,7 +3,6 @@ import {
   faDoorOpen,
   faDumbbell,
   faHouseFire,
-  faRectangleList,
   faUserNinja,
 } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons/faArrowRightFromBracket";
@@ -51,15 +50,6 @@ const NavigationBar = () => {
 
       {currentUser && (
         <>
-          <Link
-            to={"/my-plan"}
-            className={`list-group-item ${
-              active === "my-plan" ? "active" : ""
-            }`}
-          >
-            <FontAwesomeIcon icon={faRectangleList} className="me-2" />
-            <span className="d-none d-xl-inline">My Plan</span>
-          </Link>
           <Link
             to={"/profile"}
             className={`list-group-item ${
