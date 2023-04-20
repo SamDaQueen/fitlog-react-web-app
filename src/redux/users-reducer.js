@@ -1,7 +1,5 @@
 const { createSlice } = require("@reduxjs/toolkit");
 const {
-  findAllUsersThunk,
-  findUserByIdThunk,
   createUserThunk,
   deleteUserThunk,
   updateUserThunk,
@@ -34,32 +32,17 @@ const usersSlice = createSlice({
     [deleteUserThunk.fulfilled]: (state, action) => {
       state.users = state.users.filter((user) => user.id !== action.payload);
     },
-    [findAllUsersThunk.pending]: (state, action) => {
-      state.loading = true;
-      state.users = [];
-    },
-    [findAllUsersThunk.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.users = action.payload;
-    },
-    [findAllUsersThunk.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.error.message;
-    },
-    [findUserByIdThunk.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [findUserByIdThunk.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.currentUser = action.payload;
-    },
     [loginThunk.fulfilled]: (state, action) => {
       state.currentUser = action.payload;
     },
     [logoutThunk.fulfilled]: (state) => {
       state.currentUser = null;
     },
+    [profileThunk.pending]: (state) => {
+      state.loading = true;
+    },
     [profileThunk.fulfilled]: (state, action) => {
+      state.loading = false;
       state.currentUser = action.payload;
     },
     [profileThunk.rejected]: (state, action) => {

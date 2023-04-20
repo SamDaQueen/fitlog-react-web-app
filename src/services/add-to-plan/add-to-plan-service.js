@@ -7,7 +7,12 @@ export const addToPlan = async (userId, exerciseId) => {
   return response.data;
 };
 
-export const findPlan = async (userId, exerciseId) => {
+export const findPlanByUserAndExercise = async (userId, exerciseId) => {
   const response = await axios.get(`${USERS_API}/${userId}/add/${exerciseId}`);
+  return response.data;
+};
+
+export const findPlansByUserId = async (userId) => {
+  const response = await axios.get(`${USERS_API}/${userId}/plan`);
   return response.data;
 };

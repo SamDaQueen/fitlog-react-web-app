@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   addToPlan,
-  findPlan,
+  findPlanByUserAndExercise,
 } from "../../../services/add-to-plan/add-to-plan-service";
 import {
   createExercise,
@@ -36,12 +36,18 @@ const DetailsScreen = () => {
 
   const handleAddToPlan = async () => {
     // return if plan already exists
-    const plan = await findPlan(currentUser._id, id);
+    const plan = await findPlanByUserAndExercise(currentUser._id, id);
     if (plan) {
       alert("This exercise is already in your plan.");
       return;
     }
-    await createExercise({ exerciseId: id, name: details.name });
+    const image = details.images[0] ? details.images[0] : "";
+    await createExercise({
+      exerciseId: id,
+      name: details.name,
+      category: details.category,
+      image: image,
+    });
     await addToPlan(currentUser._id, id);
     alert("Exercise added to your plan.");
   };
