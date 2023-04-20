@@ -13,7 +13,7 @@ const HomeScreen = () => {
     dispatch(profileThunk())
       .unwrap()
       .catch((error) => {
-        console.log(error);
+        console.log(error.message);
       });
   }, [dispatch]);
 

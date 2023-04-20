@@ -5,11 +5,11 @@ import { Button } from "react-bootstrap";
 
 const AddComponent = () => {
   return (
-    <div className="mt-3">
+    <>
       <Button variant="primary" size="sm">
         <FontAwesomeIcon icon={faPlus} /> Add this to my plan
       </Button>
-    </div>
+    </>
   );
 };
 export default AddComponent;

@@ -1,14 +1,9 @@
 import React from "react";
 import defaultImage from "../../assets/placeholder.jpg";
-import AddComponent from "./add";
 import "./index.css";
 
 const ExercisesCard = ({ exercise: { name, category, image } }) => {
   const image_url = image || defaultImage;
-
-  function handleAddToPlan() {
-    console.log("Add to plan");
-  }
 
   return (
     <div className="card  mb-3">
@@ -20,7 +15,6 @@ const ExercisesCard = ({ exercise: { name, category, image } }) => {
           <div className="card-body ">
             <h5 className="card-title">{name}</h5>
             <p className="card-text">Category: {category}</p>
-            <AddComponent />
           </div>
         </div>
       </div>
