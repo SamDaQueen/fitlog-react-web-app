@@ -20,7 +20,7 @@ const LoginScreen = () => {
   function handleLogin(event) {
     try {
       event.preventDefault();
-      dispatch(loginThunk({ username, email, password }));
+      dispatch(loginThunk({ username, password }));
       navigate("/profile");
     } catch (error) {
       console.log(error);
