@@ -36,11 +36,11 @@ const ProfileScreen = () => {
   }
 
   useEffect(() => {
-    try {
-      dispatch(profileThunk());
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(profileThunk())
+      .unwrap()
+      .catch((error) => {
+        console.log(error);
+      });
   }, [dispatch]);
 
   function handleLogout() {
@@ -52,7 +52,7 @@ const ProfileScreen = () => {
     <>
       {!currentUser && (
         <li className="list-group-item">
-          You have not logged in yet. Please go to Login/Register Page.
+          Login invalid. Please go to Login/Register page
         </li>
       )}
       {currentUser && (
@@ -74,7 +74,7 @@ const ProfileScreen = () => {
                   <div>
                     <FontAwesomeIcon icon={faBirthdayCake} className="me-2" />
                     <span className="text-muted">
-                      Born {monthNames[date.getMonth()]} {date.getDate()}.
+                      Born {monthNames[date.getMonth()]} {date.getDate()},{" "}
                       {date.getFullYear()}
                     </span>
                   </div>

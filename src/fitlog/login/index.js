@@ -5,7 +5,6 @@ import { loginThunk, profileThunk } from "../../services/users/users-thunks";
 
 const LoginScreen = () => {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { currentUser } = useSelector((state) => state.users);
@@ -18,13 +17,17 @@ const LoginScreen = () => {
   }, [dispatch]);
 
   function handleLogin(event) {
-    try {
-      event.preventDefault();
-      dispatch(loginThunk({ username, password }));
-      navigate("/profile");
-    } catch (error) {
-      console.log(error);
-    }
+    event.preventDefault();
+    dispatch(loginThunk({ username, password }))
+      .unwrap()
+      .then(() => navigate("/profile"))
+      .catch((error) => {
+        if (error.message === "Request failed with status code 404") {
+          alert("Invalid username or password");
+        } else {
+          alert("Error logging you in");
+        }
+      });
   }
 
   return (
@@ -62,24 +65,6 @@ const LoginScreen = () => {
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="email" className="fw-bold">
-                          Email address
-                        </label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="email"
-                          value={email}
-                          onChange={(e) => {
-                            setEmail(e.target.value);
-                          }}
-                          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                          title="Please enter a valid email address"
-                          required
-                          placeholder="Enter email"
-                        />
-                      </div>
-                      <div className="form-group mb-3">
                         <label htmlFor="password" className="fw-bold">
                           Password
                         </label>
@@ -95,7 +80,7 @@ const LoginScreen = () => {
                           placeholder="Password"
                         />
                       </div>
-                      <button type="submit" className="btn btn-primary">
+                      <button type="submit" className="btn btn-primary mt-3">
                         Login
                       </button>
                     </form>

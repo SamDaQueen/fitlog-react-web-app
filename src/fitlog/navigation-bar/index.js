@@ -6,9 +6,11 @@ import {
   faRectangleList,
   faUserNinja,
 } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons/faArrowRightFromBracket";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { logoutThunk } from "../../services/users/users-thunks";
 
 const NavigationBar = () => {
   const { pathname } = useLocation();
@@ -16,6 +18,14 @@ const NavigationBar = () => {
   const active = paths[paths.length - 1];
 
   const { currentUser } = useSelector((state) => state.users);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    dispatch(logoutThunk());
+    navigate("/login");
+  }
 
   return (
     <div className="list-group">
@@ -56,6 +66,13 @@ const NavigationBar = () => {
         >
           <FontAwesomeIcon icon={faUserNinja} className="me-2" />
           <span className="d-none d-xl-inline">Profile</span>
+        </Link>
+      )}
+
+      {currentUser && (
+        <Link to={"/login"} onClick={handleLogout} className="list-group-item">
+          <FontAwesomeIcon icon={faArrowRightFromBracket} className="me-2" />
+          <span className="d-none d-xl-inline">Logout</span>
         </Link>
       )}
 

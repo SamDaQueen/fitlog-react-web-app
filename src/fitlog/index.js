@@ -9,6 +9,7 @@ import LoginScreen from "./login";
 import MyPlanComponent from "./my-plan";
 import NavigationBar from "./navigation-bar";
 import ProfileScreen from "./profile";
+import RegisterScreen from "./register";
 
 const FitLog = () => {
   return (
@@ -28,6 +29,7 @@ const FitLog = () => {
             <Route path="my-plan" element={<MyPlanComponent />} />
             <Route path="profile" element={<ProfileScreen />} />
             <Route path="login" element={<LoginScreen />} />
+            <Route path="register" element={<RegisterScreen />} />
             <Route path="edit-profile" element={<h2>Hello</h2>} />
           </Routes>
         </div>
