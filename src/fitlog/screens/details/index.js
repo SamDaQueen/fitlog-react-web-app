@@ -1,33 +1,26 @@
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   addToPlan,
   findPlan,
-} from "../../services/add-to-plan/add-to-plan-service";
-import { findExerciseById } from "../../services/exercises/exercises-service";
-import { profileThunk } from "../../services/users/users-thunks";
-import AddComponent from "../exercises/add";
+} from "../../../services/add-to-plan/add-to-plan-service";
+import {
+  createExercise,
+  findExerciseById,
+} from "../../../services/exercises/exercises-service";
+import AddComponent from "../../components/exercises/add";
 import "./index.css";
 
 const DetailsScreen = () => {
   const { id } = useParams();
   const [details, setDetails] = useState([]);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { currentUser } = useSelector((state) => state.users);
-
-  useEffect(() => {
-    dispatch(profileThunk())
-      .unwrap()
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [dispatch]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getResponse = async () => {
@@ -42,17 +35,15 @@ const DetailsScreen = () => {
   const handleBack = () => navigate(-1);
 
   const handleAddToPlan = async () => {
-    if (!currentUser) {
-      alert("You must be logged in to add to your plan.");
-      return;
-    }
     // return if plan already exists
     const plan = await findPlan(currentUser._id, id);
     if (plan) {
       alert("This exercise is already in your plan.");
       return;
     }
-    const response = await addToPlan(currentUser._id, id);
+    await createExercise({ exerciseId: id, name: details.name });
+    await addToPlan(currentUser._id, id);
+    alert("Exercise added to your plan.");
   };
 
   return (
@@ -68,12 +59,19 @@ const DetailsScreen = () => {
           <div className="col-md-9">
             <h3>{details.name}</h3>
           </div>
-          <div className="col-md-3">
-            <div onClick={handleAddToPlan}>
-              <AddComponent />
+
+          {currentUser && (
+            <div className="col-md-3">
+              <div onClick={handleAddToPlan}>
+                <AddComponent />
+              </div>
             </div>
-          </div>
+          )}
         </div>
+
+        {!currentUser && (
+          <div>Please log in to add this exercise to your personal plan.</div>
+        )}
 
         {details.images && details.images.length > 0 && (
           <img

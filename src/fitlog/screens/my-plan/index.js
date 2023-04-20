@@ -1,5 +1,5 @@
 import React from "react";
-import ExerciseList from "../exercises";
+import ExerciseList from "../../components/exercises";
 
 const MyPlanComponent = () => {
   return (

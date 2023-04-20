@@ -4,8 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   findExercisesByTermThunk,
   findExercisesThunk,
-} from "../../services/exercises/exercises-thunks";
-import ExerciseList from "../exercises";
+} from "../../../services/exercises/exercises-thunks";
+import ExerciseList from "../../components/exercises";
 import SearchBar from "./search-bar";
 
 const ExploreScreen = () => {

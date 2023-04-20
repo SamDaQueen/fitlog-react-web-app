@@ -2,10 +2,10 @@ import { faBirthdayCake } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons/faArrowRightFromBracket";
 import { faPencil } from "@fortawesome/free-solid-svg-icons/faPencil";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { logoutThunk, profileThunk } from "../../services/users/users-thunks";
+import { logoutThunk } from "../../../services/users/users-thunks";
 import "./index.css";
 
 const ProfileScreen = () => {
@@ -35,18 +35,10 @@ const ProfileScreen = () => {
     date = new Date(currentUser.birthdate);
   }
 
-  useEffect(() => {
-    dispatch(profileThunk())
-      .unwrap()
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [dispatch]);
-
-  function handleLogout() {
-    dispatch(logoutThunk());
+  const handleLogout = async () => {
+    await dispatch(logoutThunk());
     navigate("/login");
-  }
+  };
 
   return (
     <>

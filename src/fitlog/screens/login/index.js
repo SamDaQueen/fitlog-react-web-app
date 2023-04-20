@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginThunk, profileThunk } from "../../services/users/users-thunks";
+import { loginThunk } from "../../../services/users/users-thunks";
 
 const LoginScreen = () => {
   const [username, setUsername] = useState("");
@@ -11,10 +11,6 @@ const LoginScreen = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    dispatch(profileThunk());
-  }, [dispatch]);
 
   function handleLogin(event) {
     event.preventDefault();

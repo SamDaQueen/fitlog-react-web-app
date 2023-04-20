@@ -1,5 +1,5 @@
 import React from "react";
-import defaultImage from "../../assets/placeholder.jpg";
+import defaultImage from "../../../assets/placeholder.jpg";
 import "./index.css";
 
 const ExercisesCard = ({ exercise: { name, category, image } }) => {

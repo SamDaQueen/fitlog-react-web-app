@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import activities from "../fitlog/activities/activities.json";
+import activities from "../fitlog/components/activities/activities.json";
 
 const activitiesSlice = createSlice({
   name: "activities",

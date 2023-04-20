@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { profileThunk, registerThunk } from "../../services/users/users-thunks";
+import { registerThunk } from "../../../services/users/users-thunks";
 
 const RegisterScreen = () => {
   const [username, setUsername] = useState("");
@@ -17,10 +17,6 @@ const RegisterScreen = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    dispatch(profileThunk());
-  }, [dispatch]);
 
   const handleRegister = (event) => {
     event.preventDefault();

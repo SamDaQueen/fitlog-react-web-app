@@ -2,6 +2,7 @@ import axios from "axios";
 
 const EXERCISE_API = process.env.REACT_APP_EXERCISE_API;
 const IMAGE_API = "https://wger.de/";
+const SAVED_EXERCISES_API = "http://localhost:4000/api/exercises";
 
 export const findExercises = async () => {
   const response = await axios.get(EXERCISE_API);
@@ -64,4 +65,9 @@ export const findExercisesByTerm = async (term) => {
       image: imageUrl,
     };
   });
+};
+
+export const createExercise = async (exercise) => {
+  const response = await axios.post(SAVED_EXERCISES_API, exercise);
+  return response.data;
 };

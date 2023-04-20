@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { logoutThunk } from "../../services/users/users-thunks";
+import { logoutThunk } from "../../../services/users/users-thunks";
 
 const Header = () => {
   const { currentUser } = useSelector((state) => state.users);
