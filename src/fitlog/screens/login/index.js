@@ -44,7 +44,7 @@ const LoginScreen = () => {
                   </div>
                   <div className="card-body">
                     <form onSubmit={handleLogin}>
-                      <div className="form-group">
+                      <div className="form-group mb-2">
                         <label htmlFor="username" className="fw-bold">
                           Username
                         </label>

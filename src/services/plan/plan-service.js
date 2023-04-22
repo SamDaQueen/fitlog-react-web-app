@@ -22,7 +22,7 @@ export const findPlanByUserAndExercise = async (userId, exerciseId) => {
   return response.data;
 };
 
-export const findPlanByUserId = async (userId) => {
+export const findExercisesByUserId = async (userId) => {
   const plans = await axios.get(`${USERS_API}/${userId}/plan`);
   return plans.data;
 };

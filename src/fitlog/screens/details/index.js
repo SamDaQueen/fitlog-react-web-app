@@ -10,6 +10,7 @@ import {
   findPlanByUserAndExercise,
 } from "../../../services/plan/plan-service";
 import { profileThunk } from "../../../services/users/users-thunks";
+import UsersList from "../../components/users-list";
 import AddComponent from "./add";
 import DeleteComponent from "./delete";
 import "./index.css";
@@ -138,6 +139,8 @@ const DetailsScreen = () => {
           <p className="my-3">
             <strong>Language:</strong> {details.language}
           </p>
+
+          <UsersList id={id} />
         </div>
       )}
     </>

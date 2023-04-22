@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { findPlanByUserId } from "../../../services/plan/plan-service";
+import { findExercisesByUserId } from "../../../services/plan/plan-service";
 import { findUserByUsername } from "../../../services/users/users-service";
 import { logoutThunk } from "../../../services/users/users-thunks";
 import MyPlanComponent from "../../components/my-plan";
@@ -46,7 +46,7 @@ const ProfileScreen = () => {
   };
 
   const findPlansForUser = async (id) => {
-    const plans = await findPlanByUserId(id);
+    const plans = await findExercisesByUserId(id);
     setExercises(plans);
   };
 

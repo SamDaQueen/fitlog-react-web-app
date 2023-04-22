@@ -71,3 +71,10 @@ export const createExercise = async (exercise) => {
   const response = await axios.post(SAVED_EXERCISES_API, exercise);
   return response.data;
 };
+
+export const findUsersByExerciseId = async (exerciseId) => {
+  const response = await axios.get(
+    `${SAVED_EXERCISES_API}/${exerciseId}/users`
+  );
+  return response.data;
+};

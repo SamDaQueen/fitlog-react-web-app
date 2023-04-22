@@ -11,6 +11,7 @@ const RegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [role, setRole] = useState("user");
   const [birthdate, setBirthdate] = useState(new Date());
 
   const { currentUser } = useSelector((state) => state.users);
@@ -27,6 +28,7 @@ const RegisterScreen = () => {
         email,
         firstName,
         lastName,
+        role,
         birthdate,
       })
     )
@@ -59,7 +61,7 @@ const RegisterScreen = () => {
                   </div>
                   <div className="card-body">
                     <form onSubmit={handleRegister}>
-                      <div className="form-group">
+                      <div className="form-group mb-2">
                         <label htmlFor="username" className="fw-bold">
                           Username
                         </label>
@@ -73,7 +75,7 @@ const RegisterScreen = () => {
                           placeholder="Enter username"
                         />
                       </div>
-                      <div className="form-group">
+                      <div className="form-group mb-2">
                         <label htmlFor="password" className="fw-bold">
                           Password
                         </label>
@@ -87,7 +89,7 @@ const RegisterScreen = () => {
                           placeholder="Password"
                         />
                       </div>
-                      <div className="form-group">
+                      <div className="form-group mb-2">
                         <label htmlFor="email" className="fw-bold">
                           Email
                         </label>
@@ -101,7 +103,7 @@ const RegisterScreen = () => {
                           placeholder="Enter email"
                         />
                       </div>
-                      <div className="form-group">
+                      <div className="form-group mb-2">
                         <label htmlFor="firstName" className="fw-bold">
                           First Name
                         </label>
@@ -115,7 +117,7 @@ const RegisterScreen = () => {
                           placeholder="Enter first name"
                         />
                       </div>
-                      <div className="form-group">
+                      <div className="form-group mb-2">
                         <label htmlFor="lastName" className="fw-bold">
                           Last Name
                         </label>
@@ -129,6 +131,63 @@ const RegisterScreen = () => {
                           placeholder="Enter last name"
                         />
                       </div>
+                      <div className="form-group mb-2">
+                        <label className="fw-bold">Role</label>
+                        <div>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="role"
+                              id="userRole"
+                              value="USER"
+                              checked={role === "USER"}
+                              onChange={(e) => setRole(e.target.value)}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="userRole"
+                            >
+                              User
+                            </label>
+                          </div>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="role"
+                              id="trainerRole"
+                              value="TRAINER"
+                              checked={role === "TRAINER"}
+                              onChange={(e) => setRole(e.target.value)}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="trainerRole"
+                            >
+                              Trainer
+                            </label>
+                          </div>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="role"
+                              id="adminRole"
+                              value="ADMIN"
+                              checked={role === "ADMIN"}
+                              onChange={(e) => setRole(e.target.value)}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="adminRole"
+                            >
+                              Admin
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+
                       <div className="form-group">
                         <label htmlFor="birthdate" className="fw-bold">
                           Birthdate
