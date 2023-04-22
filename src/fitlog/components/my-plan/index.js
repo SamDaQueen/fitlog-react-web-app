@@ -17,9 +17,9 @@ const MyPlanComponent = ({ owner, exercises }) => {
       {exercises.length > 0 &&
         exercises.map((exercise) => (
           <Link
-            key={exercise.exerciseId}
+            key={exercise._id}
             className="no-decoration"
-            to={`/exercise/${exercise.exerciseId}`}
+            to={`/exercise/${exercise._id}`}
           >
             <ExercisesCard exercise={exercise} />
           </Link>

@@ -1,17 +1,15 @@
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  createExercise,
-  findExerciseById,
-} from "../../../services/exercises/exercises-service";
+import { findExerciseById } from "../../../services/exercises/exercises-service";
 import {
   addToPlan,
   deleteFromPlan,
   findPlanByUserAndExercise,
 } from "../../../services/plan/plan-service";
+import { profileThunk } from "../../../services/users/users-thunks";
 import AddComponent from "./add";
 import DeleteComponent from "./delete";
 import "./index.css";
@@ -25,8 +23,7 @@ const DetailsScreen = () => {
 
   const { currentUser } = useSelector((state) => state.users);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const getResponse = async () => {
+  const loadScreen = async () => {
     const exerciseDetails = await findExerciseById(id);
     setDetails(exerciseDetails);
   };
@@ -38,28 +35,28 @@ const DetailsScreen = () => {
     }
   };
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    getResponse();
+    dispatch(profileThunk());
+    loadScreen();
     checkIfInPlan();
-  }, []);
+  }, [id, currentUser, inPlan]);
 
   const handleBack = () => navigate(-1);
 
   const handleAddToPlan = async () => {
-    const image = details.images[0] ? details.images[0] : "";
-    await createExercise({
-      exerciseId: id,
-      name: details.name,
-      category: details.category,
-      image: image,
-    });
-    await addToPlan(currentUser._id, id);
-    setInPlan(true);
+    if (!inPlan) {
+      setInPlan(true);
+      await addToPlan(currentUser._id, details);
+      alert("Exercise added to your plan!");
+    }
   };
 
   const handleDeleteFromPlan = async () => {
     await deleteFromPlan(currentUser._id, id);
     setInPlan(false);
+    alert("Exercise deleted from your plan!");
   };
 
   return (
