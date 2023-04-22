@@ -36,7 +36,6 @@ const ExploreScreen = () => {
 
   return (
     <>
-      <h2>Explore</h2>
       <h5 className="mt-4">
         Explore thousands of exercises and add the ones you like to your
         personal plan.
