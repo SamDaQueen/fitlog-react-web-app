@@ -1,20 +1,31 @@
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { createReviewThunk } from "../../../services/reviews/reviews-thunks";
+import {
+  createReviewThunk,
+  findReviewsByExerciseIdThunk,
+} from "../../../services/reviews/reviews-thunks";
 import "./index.css";
+import ReviewCard from "./review-card";
 import StarRating from "./star-rating";
 
-const ReviewsComponent = ({ reviews }) => {
+const ReviewsComponent = () => {
   const { id } = useParams();
   const { currentUser } = useSelector((state) => state.users);
+  const { reviews, loading } = useSelector((state) => state.reviews);
 
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
 
   const dispatch = useDispatch();
+
+  const loadReviews = async () => {
+    await dispatch(findReviewsByExerciseIdThunk(id));
+  };
+
+  useEffect(() => {
+    loadReviews();
+  }, [dispatch]);
 
   const handleReviewChange = (event) => {
     setReview(event.target.value);
@@ -27,6 +38,7 @@ const ReviewsComponent = ({ reviews }) => {
       review: review,
       username: currentUser.username,
       exerciseId: id,
+      date: new Date().getTime(),
     };
 
     await dispatch(createReviewThunk(newReview));
@@ -69,10 +81,12 @@ const ReviewsComponent = ({ reviews }) => {
       <div className="row">
         <h5>Reviews from other users:</h5>
         <div className="list-group">
-          {reviews && reviews.length === 0 && (
+          {loading && <li className="list-group-item">Loading...</li>}
+          {!loading && reviews && reviews.length === 0 && (
             <li className="list-group-item">No reviews found</li>
           )}
-          {reviews &&
+          {!loading &&
+            reviews &&
             reviews.length > 0 &&
             reviews.map((review, index) => (
               <Link
@@ -80,21 +94,7 @@ const ReviewsComponent = ({ reviews }) => {
                 to={"/profile/" + review.username}
                 className="list-group-item"
               >
-                <div className="row">
-                  <div className="col-sm-4 col-md-3 stars">
-                    {[...Array(review.rating)].map((star, i) => {
-                      return (
-                        <FontAwesomeIcon
-                          key={i}
-                          icon={faStar}
-                        ></FontAwesomeIcon>
-                      );
-                    })}
-                  </div>
-                  <div className="col-sm-8 col-md-9">
-                    {review.review} ({review.username})
-                  </div>
-                </div>
+                <ReviewCard review={review} />{" "}
               </Link>
             ))}
         </div>

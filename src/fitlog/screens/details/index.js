@@ -9,7 +9,6 @@ import {
   deleteFromPlan,
   findPlanByUserAndExercise,
 } from "../../../services/plan/plan-service";
-import { findReviewsByExerciseIdThunk } from "../../../services/reviews/reviews-thunks";
 import { profileThunk } from "../../../services/users/users-thunks";
 import ReviewsComponent from "../../components/reviews";
 import UsersList from "../../components/users-list";
@@ -25,9 +24,6 @@ const DetailsScreen = () => {
   const navigate = useNavigate();
 
   const { currentUser } = useSelector((state) => state.users);
-  const { reviews } = useSelector((state) => state.reviews);
-
-  const [reviewsList, setReviewsList] = useState(reviews);
 
   const loadScreen = async () => {
     const exerciseDetails = await findExerciseById(id);
@@ -41,21 +37,12 @@ const DetailsScreen = () => {
     }
   };
 
-  const loadReviews = async () => {
-    await dispatch(findReviewsByExerciseIdThunk(id))
-      .unwrap()
-      .then((res) => {
-        setReviewsList(res);
-      });
-  };
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(profileThunk());
     loadScreen();
     checkIfInPlan();
-    loadReviews();
   }, [inPlan, dispatch]);
 
   const handleBack = () => navigate(-1);
@@ -158,7 +145,7 @@ const DetailsScreen = () => {
                 <strong>Language:</strong> {details.language}
               </p>
 
-              <ReviewsComponent reviews={reviewsList} />
+              <ReviewsComponent />
             </div>
             <div className="d-none d-lg-block col-lg-4">
               <UsersList id={id} />

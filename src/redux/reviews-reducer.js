@@ -22,30 +22,33 @@ const reviewsSlice = createSlice({
     },
     [createReviewThunk.fulfilled]: (state, action) => {
       state.loading = false;
-      state.reviews = action.payload;
+      state.reviews.unshift(action.payload);
     },
     [createReviewThunk.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.error;
+      state.error = action.error.message;
     },
     [findReviewsByExerciseIdThunk.pending]: (state) => {
       state.loading = true;
     },
     [findReviewsByExerciseIdThunk.fulfilled]: (state, action) => {
       state.loading = false;
-      console.log(action.payload, "action.payload");
-      state.reviews = action.payload;
+      state.reviews = action.payload.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
     },
     [findReviewsByExerciseIdThunk.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.error;
+      state.error = action.error.message;
     },
     [findReviewsByUsernameThunk.pending]: (state) => {
       state.loading = true;
     },
     [findReviewsByUsernameThunk.fulfilled]: (state, action) => {
       state.loading = false;
-      state.reviews = action.payload;
+      state.reviews = action.payload.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
     },
     [findReviewsByUsernameThunk.rejected]: (state, action) => {
       state.loading = false;
@@ -56,7 +59,9 @@ const reviewsSlice = createSlice({
     },
     [deleteReviewThunk.fulfilled]: (state, action) => {
       state.loading = false;
-      state.reviews = action.payload;
+      state.reviews = state.reviews.filter(
+        (review) => review._id !== action.payload._id
+      );
     },
     [deleteReviewThunk.rejected]: (state, action) => {
       state.loading = false;
