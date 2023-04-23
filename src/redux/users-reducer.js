@@ -33,6 +33,7 @@ const usersSlice = createSlice({
     },
     [deleteUserThunk.fulfilled]: (state, action) => {
       state.users = state.users.filter((user) => user.id !== action.payload);
+      state.currentUser = null;
     },
     [loginThunk.fulfilled]: (state, action) => {
       state.currentUser = action.payload;

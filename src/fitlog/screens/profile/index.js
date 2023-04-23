@@ -1,13 +1,13 @@
 import { faBirthdayCake } from "@fortawesome/free-solid-svg-icons";
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons/faArrowRightFromBracket";
 import { faPencil } from "@fortawesome/free-solid-svg-icons/faPencil";
+import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { findExercisesByUserId } from "../../../services/plan/plan-service";
 import { findUserByUsername } from "../../../services/users/users-service";
-import { logoutThunk } from "../../../services/users/users-thunks";
+import { deleteUserThunk } from "../../../services/users/users-thunks";
 import MyPlanComponent from "../../components/my-plan";
 import "./index.css";
 
@@ -70,9 +70,14 @@ const ProfileScreen = () => {
     date = new Date(profile.birthdate);
   }
 
-  const handleLogout = async () => {
-    await dispatch(logoutThunk());
-    navigate("/login");
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete your account?"
+    );
+    if (confirmDelete) {
+      await dispatch(deleteUserThunk(currentUser._id));
+      navigate("/home");
+    }
   };
 
   return (
@@ -135,13 +140,10 @@ const ProfileScreen = () => {
 
                   <h3
                     className="btn btn-danger float-end"
-                    onClick={handleLogout}
+                    onClick={handleDelete}
                   >
-                    <FontAwesomeIcon
-                      className="me-2"
-                      icon={faArrowRightFromBracket}
-                    />
-                    Logout
+                    <FontAwesomeIcon className="me-2" icon={faXmark} />
+                    Delete Profile
                   </h3>
                 </div>
               </>
