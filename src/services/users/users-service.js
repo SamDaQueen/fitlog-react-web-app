@@ -16,6 +16,11 @@ export const findUserById = async (id) => {
   return response.data;
 };
 
+export const findUsersByRole = async (role) => {
+  const response = await axios.get(`${USERS_API_URL}/role/${role}`);
+  return response.data;
+};
+
 export const findUserByUsername = async (username) => {
   const response = await axios.get(`${USERS_API_URL}/username/${username}`);
   return response.data;

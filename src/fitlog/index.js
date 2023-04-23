@@ -11,7 +11,7 @@ import HomeScreen from "./screens/home";
 import LoginScreen from "./screens/login";
 import ProfileScreen from "./screens/profile";
 import RegisterScreen from "./screens/register";
-import UsersScreen from "./screens/users";
+import UsersScreen from "./screens/users/users";
 
 const FitLog = () => {
   return (
