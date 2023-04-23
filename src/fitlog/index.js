@@ -18,10 +18,10 @@ const FitLog = () => {
       <CurrentUserContext>
         <div className="row">
           <Header />
-          <div className="col-2 col-md-2 col-lg-1 col-xl-2">
+          <div className="col-2">
             <NavigationBar />
           </div>
-          <div className="col-10 col-md-10 col-lg-9 col-xl-8">
+          <div className="col-10">
             <Routes>
               <Route path="/" element={<HomeScreen />} />
               <Route path="home" element={<HomeScreen />} />
@@ -34,9 +34,6 @@ const FitLog = () => {
               <Route path="register" element={<RegisterScreen />} />
               <Route path="edit-profile" element={<EditProfile />} />
             </Routes>
-          </div>
-          <div className="d-sm-none d-md-none d-lg-block col-lg-2 col-xl-2">
-            <h2>Right Content</h2>
           </div>
         </div>
       </CurrentUserContext>

@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 const AddComponent = () => {
   return (
     <>
-      <Button variant="primary" size="sm">
+      <Button className="float-end" variant="primary" size="sm">
         <FontAwesomeIcon icon={faPlus} /> Add this to your plan
       </Button>
     </>

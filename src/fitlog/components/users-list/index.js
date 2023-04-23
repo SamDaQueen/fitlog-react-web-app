@@ -19,9 +19,7 @@ const UsersList = ({ id }) => {
     <>
       <div className="card mt-3">
         <div className="card-header">
-          <h5 className="mb-0">
-            Users who have added this exercise to their plans
-          </h5>
+          <h5 className="mb-0">In plans of</h5>
         </div>
         {users.length === 0 && <div className="card-body">No users found</div>}
         {users.length > 0 && (

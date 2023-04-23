@@ -10,6 +10,7 @@ import {
   findPlanByUserAndExercise,
 } from "../../../services/plan/plan-service";
 import { profileThunk } from "../../../services/users/users-thunks";
+import ReviewsComponent from "../../components/reviews";
 import UsersList from "../../components/users-list";
 import AddComponent from "./add";
 import DeleteComponent from "./delete";
@@ -66,81 +67,90 @@ const DetailsScreen = () => {
       {id === "undefined" && <div>Exercise id does not exist!</div>}
       {id !== "undefined" && details && (
         <div className="container">
-          <div onClick={handleBack} className="btn btn-secondary mb-3">
-            <FontAwesomeIcon icon={faArrowLeft} /> {"  "}
-            Back
-          </div>
-
           <div className="row">
-            <div className="col-md-9">
-              <h3>{details.name}</h3>
-            </div>
-
-            {currentUser && !inPlan && (
-              <div className="col-md-3" onClick={handleAddToPlan}>
-                <AddComponent />
+            <div className="col-sm-12 col-lg-8">
+              <div onClick={handleBack} className="btn btn-secondary mb-3">
+                <FontAwesomeIcon icon={faArrowLeft} /> {"  "}
+                Back
               </div>
-            )}
-            {currentUser && inPlan && (
-              <div className="col-md-3" onClick={handleDeleteFromPlan}>
-                <DeleteComponent />
+
+              <div className="row">
+                <div className="col-md-7">
+                  <h3>{details.name}</h3>
+                </div>
+
+                {currentUser && !inPlan && (
+                  <div className="col-md-5" onClick={handleAddToPlan}>
+                    <AddComponent />
+                  </div>
+                )}
+                {currentUser && inPlan && (
+                  <div className="col-md-5" onClick={handleDeleteFromPlan}>
+                    <DeleteComponent />
+                  </div>
+                )}
               </div>
-            )}
-          </div>
 
-          {!currentUser && (
-            <div>Please log in to add this exercise to your personal plan.</div>
-          )}
+              {!currentUser && (
+                <div>
+                  Please log in to add this exercise to your personal plan.
+                </div>
+              )}
 
-          {details.images && details.images.length > 0 && (
-            <img
-              src={details.images[0]}
-              alt={details.name}
-              className="img-fluid my-3 details-image"
-            />
-          )}
+              {details.images && details.images.length > 0 && (
+                <img
+                  src={details.images[0]}
+                  alt={details.name}
+                  className="img-fluid my-3 details-image"
+                />
+              )}
 
-          {details.description && details.description.length > 0 && (
-            <h6 className="my-3">
-              {details.description.replace(/(<([^>]+)>)/gi, " ")}
-            </h6>
-          )}
+              {details.description && details.description.length > 0 && (
+                <h6 className="my-3">
+                  {details.description.replace(/(<([^>]+)>)/gi, " ")}
+                </h6>
+              )}
 
-          {details.category && details.category.length > 0 && (
-            <>
+              {details.category && details.category.length > 0 && (
+                <>
+                  <p className="my-3">
+                    <strong>Category:</strong> {details.category}
+                  </p>
+                </>
+              )}
+
+              {details.muscles && details.muscles.length > 0 && (
+                <>
+                  <h5 className="my-3">Muscles:</h5>
+                  <ul>
+                    {details.muscles.map((muscle, index) => (
+                      <li key={index}>{muscle}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
+
+              {details.equipment && details.equipment.length > 0 && (
+                <>
+                  <h5 className="my-3">Equipment:</h5>
+                  <ul>
+                    {details.equipment.map((equipment, index) => (
+                      <li key={index}>{equipment}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
+
               <p className="my-3">
-                <strong>Category:</strong> {details.category}
+                <strong>Language:</strong> {details.language}
               </p>
-            </>
-          )}
 
-          {details.muscles && details.muscles.length > 0 && (
-            <>
-              <h5 className="my-3">Muscles:</h5>
-              <ul>
-                {details.muscles.map((muscle, index) => (
-                  <li key={index}>{muscle}</li>
-                ))}
-              </ul>
-            </>
-          )}
-
-          {details.equipment && details.equipment.length > 0 && (
-            <>
-              <h5 className="my-3">Equipment:</h5>
-              <ul>
-                {details.equipment.map((equipment, index) => (
-                  <li key={index}>{equipment}</li>
-                ))}
-              </ul>
-            </>
-          )}
-
-          <p className="my-3">
-            <strong>Language:</strong> {details.language}
-          </p>
-
-          <UsersList id={id} />
+              <ReviewsComponent id={id} />
+            </div>
+            <div className="d-none d-lg-block col-lg-4">
+              <UsersList id={id} />
+            </div>
+          </div>
         </div>
       )}
     </>

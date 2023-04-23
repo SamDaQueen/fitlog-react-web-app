@@ -36,8 +36,8 @@ const NavigationBar = () => {
             : ""
         }`}
       >
-        <FontAwesomeIcon icon={faHouseFire} className="me-2" />
-        <span className="d-none d-xl-inline">Home</span>
+        <FontAwesomeIcon icon={faHouseFire} className="me-2 ms-sm-0" />
+        <span className="d-none d-lg-inline">Home</span>
       </Link>
 
       <Link
@@ -45,7 +45,7 @@ const NavigationBar = () => {
         className={`list-group-item ${active === "search" ? "active" : ""}`}
       >
         <FontAwesomeIcon icon={faDumbbell} className="me-2" />
-        <span className="d-none d-xl-inline">Explore</span>
+        <span className="d-none d-lg-inline">Explore</span>
       </Link>
 
       {currentUser && (
@@ -57,7 +57,7 @@ const NavigationBar = () => {
             }`}
           >
             <FontAwesomeIcon icon={faUserNinja} className="me-2" />
-            <span className="d-none d-xl-inline">Profile</span>
+            <span className="d-none d-lg-inline">Profile</span>
           </Link>
           <Link
             to={"/login"}
@@ -65,7 +65,7 @@ const NavigationBar = () => {
             className="list-group-item"
           >
             <FontAwesomeIcon icon={faArrowRightFromBracket} className="me-2" />
-            <span className="d-none d-xl-inline">Logout</span>
+            <span className="d-none d-lg-inline">Logout</span>
           </Link>{" "}
         </>
       )}
@@ -77,7 +77,7 @@ const NavigationBar = () => {
             className={`list-group-item ${active === "login" ? "active" : ""}`}
           >
             <FontAwesomeIcon icon={faArrowRightToBracket} className="me-2" />
-            <span className="d-none d-xl-inline">Login</span>
+            <span className="d-none d-lg-inline">Login</span>
           </Link>
 
           <Link
@@ -87,7 +87,7 @@ const NavigationBar = () => {
             }`}
           >
             <FontAwesomeIcon icon={faDoorOpen} className="me-2" />
-            <span className="d-none d-xl-inline">Register</span>
+            <span className="d-none d-lg-inline">Register</span>
           </Link>
         </>
       )}

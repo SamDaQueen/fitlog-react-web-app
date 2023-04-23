@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 const AddComponent = () => {
   return (
     <>
-      <Button variant="danger" size="sm">
+      <Button className="float-end" variant="danger" size="sm">
         <FontAwesomeIcon icon={faXmark} /> Remove from your plan
       </Button>
     </>

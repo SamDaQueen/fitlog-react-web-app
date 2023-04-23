@@ -5,9 +5,9 @@ const SearchBar = ({ search, setSearch, handleSearch }) => {
   return (
     <>
       <div className="row mt-4 mb-3">
-        <form className="col-12" onSubmit={handleSearch}>
+        <form onSubmit={handleSearch}>
           <div className="row">
-            <div className="col-md-11">
+            <div className="col-sm-10 col-md-11">
               <div className="form-group">
                 <input
                   type="text"
@@ -18,7 +18,7 @@ const SearchBar = ({ search, setSearch, handleSearch }) => {
                 />
               </div>
             </div>
-            <div className="col-md-1">
+            <div className="col-sm-2 col-md-1">
               <button type="submit" className="btn btn-primary float-end">
                 <FontAwesomeIcon icon={faSearch} />
               </button>
