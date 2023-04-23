@@ -82,14 +82,19 @@ const ProfileScreen = () => {
 
   return (
     <>
-      {!currentUser && !profile && (
-        <li className="list-group-item">
-          Login invalid. Please go to Login/Register page
-        </li>
-      )}
-      {currentUser && !profile && (
-        <li className="list-group-item">This profile could not be found!</li>
-      )}
+      <div className="list-group">
+        {username && !profile && (
+          <li className="list-group-item">This profile could not be found!</li>
+        )}
+        {!currentUser && !profile && !username && (
+          <li className="list-group-item">
+            Login invalid. Please go to Login/Register page
+          </li>
+        )}
+        {currentUser && !profile && (
+          <li className="list-group-item">This profile could not be found!</li>
+        )}
+      </div>
       {profile && (
         <div className="card rounded-1">
           <div className="card-header">

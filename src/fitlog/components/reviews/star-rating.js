@@ -1,9 +1,6 @@
-import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
-const StarRating = () => {
-  const [rating, setRating] = useState(0);
-
+const StarRating = ({ rating, setRating }) => {
   const handleClick = (value) => {
     setRating(value);
   };
@@ -19,6 +16,7 @@ const StarRating = () => {
               name="rating"
               value={ratingValue}
               onClick={() => handleClick(ratingValue)}
+              className="d-none"
             />
             <FaStar
               className="star-icon mb-1"

@@ -6,11 +6,7 @@ const CurrentUserContext = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(profileThunk())
-      .unwrap()
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(profileThunk());
   }, [dispatch]);
 
   return children;

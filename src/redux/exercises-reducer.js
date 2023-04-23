@@ -20,7 +20,6 @@ const exercisesSlice = createSlice({
   extraReducers: {
     [findExercisesThunk.pending]: (state) => {
       state.loading = true;
-      state.exercises = [];
     },
     [findExercisesThunk.fulfilled]: (state, { payload }) => {
       state.loading = false;
@@ -36,7 +35,6 @@ const exercisesSlice = createSlice({
     },
     [findExercisesByTermThunk.pending]: (state) => {
       state.loading = true;
-      state.exercises = [];
     },
     [findExercisesByTermThunk.fulfilled]: (state, { payload }) => {
       state.loading = false;
