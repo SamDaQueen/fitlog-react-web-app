@@ -11,6 +11,7 @@ import HomeScreen from "./screens/home";
 import LoginScreen from "./screens/login";
 import ProfileScreen from "./screens/profile";
 import RegisterScreen from "./screens/register";
+import UsersScreen from "./screens/users";
 
 const FitLog = () => {
   return (
@@ -30,6 +31,7 @@ const FitLog = () => {
               <Route path="search/:searchTerm" element={<ExploreScreen />} />
               <Route path="profile" element={<ProfileScreen />} />
               <Route path="profile/:username" element={<ProfileScreen />} />
+              <Route path="users" element={<UsersScreen />} />
               <Route path="login" element={<LoginScreen />} />
               <Route path="register" element={<RegisterScreen />} />
               <Route path="edit-profile" element={<EditProfile />} />
