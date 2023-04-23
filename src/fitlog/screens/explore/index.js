@@ -36,16 +36,20 @@ const ExploreScreen = () => {
 
   return (
     <>
-      <h5 className="mt-4">
-        Explore thousands of exercises and add the ones you like to your
-        personal plan.
-      </h5>
-      <SearchBar
-        search={search}
-        setSearch={setSearch}
-        handleSearch={handleSearch}
-      />
-      <ExerciseList />
+      <div className="row">
+        <div className="col-md-9 col-lg-7">
+          <h5 className="mt-4">
+            Explore thousands of exercises and add the ones you like to your
+            personal plan.
+          </h5>
+          <SearchBar
+            search={search}
+            setSearch={setSearch}
+            handleSearch={handleSearch}
+          />
+          <ExerciseList />
+        </div>
+      </div>
     </>
   );
 };

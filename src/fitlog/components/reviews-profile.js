@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import ReviewCard from "./reviews/review-card";
 
 const ReviewsProfile = ({ reviews }) => {
-  console.log(reviews);
   return (
     <>
       <h2>Reviews</h2>
