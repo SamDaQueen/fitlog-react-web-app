@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { findAllUsers } from "../../services/users/users-service";
-import UserCard from "../components/users/users-card";
+import {
+  findAllUsers,
+  findUsersByRole,
+} from "../../../services/users/users-service";
+import UserCard from "../../components/users/users-card";
 
 const UsersScreen = () => {
   const usersList = useSelector((state) => state.users.users);
 
   const [users, setUsers] = useState(usersList);
+  const [trainers, setTrainers] = useState([]);
 
   const { currentUser } = useSelector((state) => state.users);
 
@@ -15,12 +18,19 @@ const UsersScreen = () => {
   if (currentUser) {
     admin = currentUser.role === "ADMIN";
   }
+  const loadTrainers = async () => {
+    const trainers = await findUsersByRole("TRAINER");
+    setTrainers(trainers);
+  };
+
+  useEffect(() => {
+    loadTrainers();
+  }, []);
 
   const dispatch = useDispatch();
 
   const findUsers = async () => {
     const users = await findAllUsers();
-    console.log(users);
     setUsers(users);
   };
 
@@ -36,13 +46,7 @@ const UsersScreen = () => {
           <h1>Users</h1>
           <div className="list-group">
             {users.map((user, index) => (
-              <Link
-                key={index}
-                to={"/profile/" + user.username}
-                className="list-group-item"
-              >
-                <UserCard user={user} />{" "}
-              </Link>
+              <UserCard user={user} trainers={trainers} />
             ))}
           </div>
         </>

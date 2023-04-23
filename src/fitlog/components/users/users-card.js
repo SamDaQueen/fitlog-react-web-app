@@ -1,6 +1,39 @@
-const UserCard = ({ user }) => {
+import { useEffect, useState } from "react";
+import {
+  createTrainerUser,
+  deleteTrainerUserByUserId,
+  findTrainerByUserId,
+} from "../../../services/trainers/trainer-service";
+
+const UserCard = ({ user, trainers }) => {
+  const [selectedTrainer, setSelectedTrainer] = useState("");
+
+  const handleTrainerSelection = async (trainerId) => {
+    if (trainerId === selectedTrainer) {
+      return;
+    }
+    if (trainerId === "") {
+      await deleteTrainerUserByUserId(user._id);
+      setSelectedTrainer("");
+      return;
+    }
+    console.log(trainerId);
+    setSelectedTrainer(trainerId);
+    await createTrainerUser({ userId: user._id, trainerId });
+  };
+
+  const findTrainer = async () => {
+    const trainer = await findTrainerByUserId(user._id);
+    console.log(trainer.trainerId);
+    setSelectedTrainer(trainer.trainerId._id);
+  };
+
+  useEffect(() => {
+    findTrainer();
+  }, []);
+
   return (
-    <div className="row">
+    <div className="row mb-3">
       <div className="col-lg-6 col-md-5">
         <div className="row">
           <div className="col-xl-3 col-sm-6">
@@ -40,6 +73,27 @@ const UserCard = ({ user }) => {
           </div>
           <div className="col-xl-9 col-md-8 col-sm-6">{user.role}</div>
         </div>
+        {user.role === "USER" && (
+          <div className="row">
+            <div className="col-xl-3 col-md-4 col-sm-6">
+              <strong>Trainer:</strong>
+            </div>
+            <div className="col-xl-9 col-md-8 col-sm-6">
+              <select
+                className="form-select"
+                value={selectedTrainer}
+                onChange={(e) => handleTrainerSelection(e.target.value)}
+              >
+                <option value="">Select Trainer</option>
+                {trainers.map((trainer) => (
+                  <option key={trainer._id} value={trainer._id}>
+                    {trainer.username}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

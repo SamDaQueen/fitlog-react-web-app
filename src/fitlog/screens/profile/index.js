@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { findExercisesByUserId } from "../../../services/plan/plan-service";
 import { findReviewsByUsername } from "../../../services/reviews/reviews-service";
+import { findTrainerByUserId } from "../../../services/trainers/trainer-service";
 import { findUserByUsername } from "../../../services/users/users-service";
 import { deleteUserThunk } from "../../../services/users/users-thunks";
 import MyPlanComponent from "../../components/my-plan";
@@ -20,6 +21,7 @@ const ProfileScreen = () => {
   const [owner, setOwner] = useState(false);
   const [exercises, setExercises] = useState([]);
   const [reviews, setReviews] = useState([]);
+  const [selectedTrainer, setSelectedTrainer] = useState("");
 
   let admin = false;
   if (currentUser) {
@@ -34,8 +36,6 @@ const ProfileScreen = () => {
     if (user) {
       setProfile(user);
       setOwner(false);
-      await findPlansForUser(user._id);
-      await findReviewsForUser(user.username);
     }
   };
 
@@ -49,15 +49,22 @@ const ProfileScreen = () => {
     setReviews(reviews.data);
   };
 
+  const findTrainer = async () => {
+    const trainer = await findTrainerByUserId(profile._id);
+    console.log(trainer.trainerId);
+    setSelectedTrainer(trainer.trainerId.username);
+  };
+
   const loadProfile = async () => {
     if (username) {
       await fetchUserProfile();
     } else {
       setProfile(currentUser);
       setOwner(true);
-      await findPlansForUser(currentUser._id);
-      await findReviewsForUser(currentUser.username);
     }
+    await findPlansForUser(profile._id);
+    await findReviewsForUser(profile.username);
+    await findTrainer();
   };
 
   useEffect(() => {
@@ -123,6 +130,12 @@ const ProfileScreen = () => {
                         <span className="fw-bold">Role: </span>
                         {profile.role}
                       </div>
+                      <Link to={`/profile/${selectedTrainer}`}>
+                        <div className="text-muted">
+                          <span className="fw-bold">Trainer: </span>
+                          {selectedTrainer || "None"}
+                        </div>
+                      </Link>
                     </>
                   )}
                   {profile.birthdate && (
