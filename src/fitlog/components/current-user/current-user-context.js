@@ -11,7 +11,7 @@ const CurrentUserContext = ({ children }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [dispatch]);
 
   return children;
 };

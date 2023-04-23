@@ -25,9 +25,11 @@ const usersSlice = createSlice({
       state.users = state.users.map((user) =>
         user.id === action.payload.id ? action.payload : user
       );
+      state.currentUser = action.payload;
     },
     [createUserThunk.fulfilled]: (state, action) => {
       state.users.push(action.payload);
+      state.currentUser = action.payload;
     },
     [deleteUserThunk.fulfilled]: (state, action) => {
       state.users = state.users.filter((user) => user.id !== action.payload);

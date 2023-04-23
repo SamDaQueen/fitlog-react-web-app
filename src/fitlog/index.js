@@ -4,6 +4,7 @@ import store from "../redux/store";
 import CurrentUserContext from "./components/current-user/current-user-context";
 import Header from "./components/header";
 import NavigationBar from "./components/navigation-bar";
+import EditProfile from "./edit-profile";
 import DetailsScreen from "./screens/details";
 import ExploreScreen from "./screens/explore";
 import HomeScreen from "./screens/home";
@@ -31,7 +32,7 @@ const FitLog = () => {
               <Route path="profile/:username" element={<ProfileScreen />} />
               <Route path="login" element={<LoginScreen />} />
               <Route path="register" element={<RegisterScreen />} />
-              <Route path="edit-profile" element={<h2>Hello</h2>} />
+              <Route path="edit-profile" element={<EditProfile />} />
             </Routes>
           </div>
           <div className="d-sm-none d-md-none d-lg-block col-lg-2 col-xl-2">

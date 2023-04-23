@@ -11,7 +11,7 @@ const RegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [role, setRole] = useState("user");
+  const [role, setRole] = useState("USER");
   const [birthdate, setBirthdate] = useState(new Date());
 
   const { currentUser } = useSelector((state) => state.users);
