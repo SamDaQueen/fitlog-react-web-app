@@ -2,18 +2,25 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteReviewThunk } from "../../../services/reviews/reviews-thunks";
 
 const ReviewCard = ({ review, page }) => {
   const dateObj = new Date(review.date);
   const dispatch = useDispatch();
 
+  const { currentUser } = useSelector((state) => state.users);
+  let admin = false;
+  if (currentUser) {
+    admin = currentUser.role === "ADMIN";
+  }
+
   const handleDelete = (event) => {
     event.preventDefault();
     console.log("delete");
     dispatch(deleteReviewThunk(review._id));
   };
+
   return (
     <div className="row">
       {page === "profile" && <div>{review.exerciseId}</div>}
@@ -34,7 +41,7 @@ const ReviewCard = ({ review, page }) => {
           })}
         </span>
       </div>
-      {page !== "profile" && (
+      {page !== "profile" && admin && (
         <div className="col-1">
           <FontAwesomeIcon
             icon={faXmark}

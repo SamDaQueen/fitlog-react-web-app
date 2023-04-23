@@ -36,7 +36,7 @@ const ExploreScreen = () => {
 
   return (
     <>
-      <div className="row">
+      <div className="row justify-content-center">
         <div className="col-md-9 col-lg-7">
           <h5 className="mt-4">
             Explore thousands of exercises and add the ones you like to your

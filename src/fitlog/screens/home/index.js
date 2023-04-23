@@ -6,7 +6,11 @@ const HomeScreen = () => {
   return (
     <>
       <HeroComponent />
-      <ActivityList />
+      <div className="row justify-content-center">
+        <div className="col-md-8">
+          <ActivityList />
+        </div>
+      </div>
     </>
   );
 };

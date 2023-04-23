@@ -21,20 +21,10 @@ const ProfileScreen = () => {
   const [exercises, setExercises] = useState([]);
   const [reviews, setReviews] = useState([]);
 
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  let admin = false;
+  if (currentUser) {
+    admin = currentUser.role === "ADMIN";
+  }
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -75,17 +65,21 @@ const ProfileScreen = () => {
   }, [currentUser, username]);
 
   let date = new Date();
-
   if (profile && profile.birthdate) {
     date = new Date(profile.birthdate);
   }
 
+  let editPath = `/edit-profile`;
+  if (profile && username) {
+    editPath = `/edit-profile/${profile.username}`;
+  }
+
   const handleDelete = async () => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete your account?"
+      "Are you sure you want to delete this account?"
     );
     if (confirmDelete) {
-      await dispatch(deleteUserThunk(currentUser._id));
+      await dispatch(deleteUserThunk(profile._id));
       navigate("/home");
     }
   };
@@ -95,7 +89,7 @@ const ProfileScreen = () => {
       <div className="row">
         <div className="col-sm-12 col-lg-7">
           <div className="list-group">
-            {username && !profile && (
+            {(username || currentUser) && !profile && (
               <li className="list-group-item">
                 This profile could not be found!
               </li>
@@ -103,11 +97,6 @@ const ProfileScreen = () => {
             {!currentUser && !profile && !username && (
               <li className="list-group-item">
                 Login invalid. Please go to Login/Register page
-              </li>
-            )}
-            {currentUser && !profile && (
-              <li className="list-group-item">
-                This profile could not be found!
               </li>
             )}
           </div>
@@ -144,18 +133,21 @@ const ProfileScreen = () => {
                           className="me-2"
                         />
                         <span className="text-muted">
-                          Born {monthNames[date.getMonth()]} {date.getDate()},{" "}
-                          {date.getFullYear()}
+                          {date.toLocaleString("en-US", {
+                            month: "long",
+                            day: "numeric",
+                          })}
+                          , {date.getFullYear()}
                         </span>
                       </div>
                     </div>
                   )}
                 </div>
 
-                {owner && (
+                {(owner || admin) && (
                   <>
                     <div className="col-4">
-                      <Link to={"../edit-profile"}>
+                      <Link to={editPath}>
                         <h3 className="btn btn-primary float-end mb-5">
                           <FontAwesomeIcon className="me-2" icon={faPencil} />
                           Edit Profile
