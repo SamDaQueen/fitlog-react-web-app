@@ -48,7 +48,7 @@ const ExerciseList = () => {
           <Link
             key={exercise.id}
             className="no-decoration"
-            to={`/exercise/${exercise.id}`}
+            to={`/details/${exercise.id}`}
           >
             <ExercisesCard exercise={exercise} />
           </Link>

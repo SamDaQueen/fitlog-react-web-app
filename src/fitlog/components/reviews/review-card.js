@@ -5,7 +5,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteReviewThunk } from "../../../services/reviews/reviews-thunks";
 
-const ReviewCard = ({ review }) => {
+const ReviewCard = ({ review, page }) => {
   const dateObj = new Date(review.date);
   const dispatch = useDispatch();
 
@@ -16,13 +16,14 @@ const ReviewCard = ({ review }) => {
   };
   return (
     <div className="row">
+      {page === "profile" && <div>{review.exerciseId}</div>}
       <div className="col-sm-4 col-md-3 stars">
         {[...Array(review.rating)].map((star, i) => {
           return <FontAwesomeIcon key={i} icon={faStar}></FontAwesomeIcon>;
         })}
       </div>
       <div className="col-sm-7 col-md-8">
-        {review.review} ({review.username}){" "}
+        {review.review} {page !== "profile" && `(${review.username})`}{" "}
         <span className="d-none d-md-inline text-muted">
           {dateObj.toLocaleString("en-US", {
             hour: "numeric",
@@ -33,13 +34,15 @@ const ReviewCard = ({ review }) => {
           })}
         </span>
       </div>
-      <div className="col-1">
-        <FontAwesomeIcon
-          icon={faXmark}
-          style={{ color: "#536471" }}
-          onClick={handleDelete}
-        />
-      </div>
+      {page !== "profile" && (
+        <div className="col-1">
+          <FontAwesomeIcon
+            icon={faXmark}
+            style={{ color: "#536471" }}
+            onClick={handleDelete}
+          />
+        </div>
+      )}
     </div>
   );
 };

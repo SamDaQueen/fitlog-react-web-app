@@ -3,7 +3,6 @@ import {
   createReviewThunk,
   deleteReviewThunk,
   findReviewsByExerciseIdThunk,
-  findReviewsByUsernameThunk,
 } from "../services/reviews/reviews-thunks";
 
 const initialState = {
@@ -40,19 +39,6 @@ const reviewsSlice = createSlice({
     [findReviewsByExerciseIdThunk.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.error.message;
-    },
-    [findReviewsByUsernameThunk.pending]: (state) => {
-      state.loading = true;
-    },
-    [findReviewsByUsernameThunk.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.reviews = action.payload.sort((a, b) => {
-        return new Date(b.date) - new Date(a.date);
-      });
-    },
-    [findReviewsByUsernameThunk.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.error;
     },
     [deleteReviewThunk.pending]: (state) => {
       state.loading = true;

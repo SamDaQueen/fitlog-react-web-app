@@ -19,7 +19,7 @@ const MyPlanComponent = ({ owner, exercises }) => {
           <Link
             key={exercise._id}
             className="no-decoration"
-            to={`/exercise/${exercise._id}`}
+            to={`/details/${exercise._id}`}
           >
             <ExercisesCard exercise={exercise} />
           </Link>

@@ -26,7 +26,7 @@ const FitLog = () => {
               <Route path="/" element={<HomeScreen />} />
               <Route path="home" element={<HomeScreen />} />
               <Route path="search" element={<ExploreScreen />} />
-              <Route path="exercise/:id" element={<DetailsScreen />} />
+              <Route path="details/:id" element={<DetailsScreen />} />
               <Route path="search/:searchTerm" element={<ExploreScreen />} />
               <Route path="profile" element={<ProfileScreen />} />
               <Route path="profile/:username" element={<ProfileScreen />} />

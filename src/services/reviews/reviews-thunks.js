@@ -17,14 +17,6 @@ export const findReviewsByExerciseIdThunk = createAsyncThunk(
   }
 );
 
-export const findReviewsByUsernameThunk = createAsyncThunk(
-  "reviews/findReviewsByUsername",
-  async (username) => {
-    const response = await reviewService.findReviewsByUsername(username);
-    return response.data;
-  }
-);
-
 export const deleteReviewThunk = createAsyncThunk(
   "reviews/delete",
   async (reviewId) => {
