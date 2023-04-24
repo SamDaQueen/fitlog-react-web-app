@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { findActivitiesByUsername } from "../../../services/activities/activities-service";
 import { findExercisesByUserId } from "../../../services/plan/plan-service";
 import { findReviewsByUsername } from "../../../services/reviews/reviews-service";
 import {
@@ -13,8 +14,9 @@ import {
 } from "../../../services/trainers/trainer-service";
 import { findUserByUsername } from "../../../services/users/users-service";
 import { deleteUserThunk } from "../../../services/users/users-thunks";
+import ActivityCard from "../../components/activities/activity-card";
 import MyPlanComponent from "../../components/my-plan";
-import ReviewsProfile from "../../components/reviews-profile";
+import ReviewsProfile from "../../components/reviews/reviews-profile";
 import "./index.css";
 
 const ProfileScreen = () => {
@@ -24,6 +26,7 @@ const ProfileScreen = () => {
   const [owner, setOwner] = useState(false);
   const [exercises, setExercises] = useState([]);
   const [reviews, setReviews] = useState([]);
+  const [activities, setActivities] = useState([]);
   const [selectedTrainer, setSelectedTrainer] = useState("");
   const [users, setUsers] = useState([]);
 
@@ -39,6 +42,9 @@ const ProfileScreen = () => {
     const user = await findUserByUsername(username);
     if (user) {
       setProfile(user);
+      await findPlansForUser(user._id);
+      await findReviewsForUser(user.username);
+      await findActivitiesForUser(user.username);
       setOwner(false);
     }
   };
@@ -48,9 +54,14 @@ const ProfileScreen = () => {
     setExercises(plans);
   };
 
-  const findReviewsForUser = async (id) => {
-    const reviews = await findReviewsByUsername(id);
+  const findReviewsForUser = async (username) => {
+    const reviews = await findReviewsByUsername(username);
     setReviews(reviews.data);
+  };
+
+  const findActivitiesForUser = async (username) => {
+    const activities = await findActivitiesByUsername(username);
+    setActivities(activities);
   };
 
   const findTrainer = async () => {
@@ -60,7 +71,7 @@ const ProfileScreen = () => {
   };
 
   const fetchUsers = async () => {
-    const users = await findAllUsersByTrainerId(currentUser._id);
+    const users = await findAllUsersByTrainerId(profile._id);
     setUsers(users);
   };
 
@@ -69,14 +80,16 @@ const ProfileScreen = () => {
       await fetchUserProfile();
     } else {
       setProfile(currentUser);
+      await findPlansForUser(currentUser._id);
+      await findReviewsForUser(currentUser.username);
+      await findActivitiesForUser(currentUser.username);
       setOwner(true);
     }
-    await findPlansForUser(profile._id);
-    await findReviewsForUser(profile.username);
+
     if (currentUser && currentUser.role === "TRAINER") {
       await fetchUsers();
     }
-    if (currentUser && currentUser.role === "USER") {
+    if (profile && profile.role === "USER") {
       await findTrainer();
     }
   };
@@ -196,11 +209,11 @@ const ProfileScreen = () => {
               </div>
             </div>
           )}
-          {profile && profile.role === "TRAINER" && (
+          {profile && currentUser && currentUser.role === "TRAINER" && (
             <div className="card rounded-1 mt-3">
               <div className="card-header">
                 <h5 className="mb-0">
-                  Your Assigned Users (Contact admin to change assignment)
+                  Assigned Users (Contact admin to change assignment)
                 </h5>
               </div>
               <div className="list-group">
@@ -218,6 +231,9 @@ const ProfileScreen = () => {
         </div>
         <div className="col-5 d-none d-lg-block">
           <ReviewsProfile reviews={reviews} />
+          <h2 className="mt-5">Recent Activities</h2>
+          {activities &&
+            activities.map((activity) => <ActivityCard activity={activity} />)}
         </div>
       </div>
     </>

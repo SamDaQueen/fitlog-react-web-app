@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ReviewCard from "./reviews/review-card";
+import ReviewCard from "./review-card";
 
 const ReviewsProfile = ({ reviews }) => {
   return (

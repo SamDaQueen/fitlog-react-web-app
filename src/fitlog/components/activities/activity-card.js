@@ -1,18 +1,10 @@
-import { faThumbsDown as faThumbsDownEmpty } from "@fortawesome/free-regular-svg-icons";
-import {
-  faFire,
-  faThumbsDown as faThumbsDownFilled,
-} from "@fortawesome/free-solid-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteActivityThunk } from "../../../services/activities/activities-thunk";
 
 const ActivityCard = ({ activity: { message, username, date, _id } }) => {
-  const [disliked, setDisliked] = useState(false);
-  const [fired, setFired] = useState(false);
-
   const { currentUser } = useSelector((state) => state.users);
   let admin = false;
   if (currentUser) {
@@ -20,14 +12,6 @@ const ActivityCard = ({ activity: { message, username, date, _id } }) => {
   }
 
   const dispatch = useDispatch();
-
-  const handleDislike = () => {
-    setDisliked(!disliked);
-  };
-
-  const handleFire = () => {
-    setFired(!fired);
-  };
 
   const handleDelete = (event) => {
     event.preventDefault();
@@ -37,13 +21,11 @@ const ActivityCard = ({ activity: { message, username, date, _id } }) => {
 
   const dateObj = new Date(date);
 
-  const thumbsDownIcon = disliked ? faThumbsDownFilled : faThumbsDownEmpty;
-
   return (
     <div className="card mb-2">
       <div className="card-body">
         <div className="row">
-          <div className="col-8">
+          <div className="col-11">
             <h5 className="card-title">{message}</h5>
             <h6 className="card-subtitle mb-2 text-muted">@{username}</h6>
             <p className="card-text text-muted">
@@ -57,22 +39,6 @@ const ActivityCard = ({ activity: { message, username, date, _id } }) => {
               })}
               , {dateObj.getFullYear()}
             </p>
-          </div>
-          <div className="col-3">
-            <button className="btn btn-link" onClick={handleFire}>
-              <FontAwesomeIcon
-                icon={faFire}
-                className="me-3"
-                style={{ color: fired ? "orange" : "black" }}
-              />
-            </button>
-            <button className="btn btn-link" onClick={handleDislike}>
-              <FontAwesomeIcon
-                icon={thumbsDownIcon}
-                className="me-2"
-                style={{ color: disliked ? "blue" : "black" }}
-              />
-            </button>
           </div>
           {(admin || (currentUser && username === currentUser.username)) && (
             <div className="col-1">

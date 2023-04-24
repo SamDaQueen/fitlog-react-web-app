@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { findAllActivitiesThunk } from "../../../services/activities/activities-thunk";
 import ActivityCard from "./activity-card";
 import NewActivityComponent from "./new-activity";
@@ -26,7 +27,14 @@ const ActivityList = () => {
         {currentUser && <NewActivityComponent />}
         {loading && <li className="list-group-item">Loading...</li>}
         {!loading &&
-          activities.map((activity) => <ActivityCard activity={activity} />)}
+          activities.map((activity) => (
+            <Link
+              to={`/profile/${activity.username}`}
+              className="no-decoration"
+            >
+              <ActivityCard activity={activity} />
+            </Link>
+          ))}
       </div>
     </div>
   );
