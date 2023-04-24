@@ -71,7 +71,7 @@ const ReviewsComponent = () => {
               </div>
             </div>
           </div>
-          <button type="submit" className="btn btn-primary mb-2">
+          <button type="submit" className="btn btn-primary m3-2">
             Submit
           </button>
         </form>

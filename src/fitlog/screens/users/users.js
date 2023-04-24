@@ -45,7 +45,7 @@ const UsersScreen = () => {
         <>
           <h1>Users</h1>
           <div className="list-group">
-            {users.map((user, index) => (
+            {users.map((user) => (
               <UserCard user={user} trainers={trainers} />
             ))}
           </div>

@@ -2,9 +2,12 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteActivityThunk } from "../../../services/activities/activities-thunk";
+import {
+  deleteActivityThunk,
+  findAllActivitiesThunk,
+} from "../../../services/activities/activities-thunk";
 
-const ActivityCard = ({ activity: { message, username, date, _id } }) => {
+const ActivityCard = ({ activity: { message, username, date, _id }, page }) => {
   const { currentUser } = useSelector((state) => state.users);
   let admin = false;
   if (currentUser) {
@@ -13,10 +16,11 @@ const ActivityCard = ({ activity: { message, username, date, _id } }) => {
 
   const dispatch = useDispatch();
 
-  const handleDelete = (event) => {
+  const handleDelete = async (event) => {
     event.preventDefault();
     console.log("delete");
-    dispatch(deleteActivityThunk(_id));
+    await dispatch(deleteActivityThunk(_id));
+    await dispatch(findAllActivitiesThunk());
   };
 
   const dateObj = new Date(date);
@@ -40,15 +44,16 @@ const ActivityCard = ({ activity: { message, username, date, _id } }) => {
               , {dateObj.getFullYear()}
             </p>
           </div>
-          {(admin || (currentUser && username === currentUser.username)) && (
-            <div className="col-1">
-              <FontAwesomeIcon
-                icon={faXmark}
-                style={{ color: "#536471" }}
-                onClick={handleDelete}
-              />
-            </div>
-          )}
+          {page !== "profile" &&
+            (admin || (currentUser && username === currentUser.username)) && (
+              <div className="col-1">
+                <FontAwesomeIcon
+                  icon={faXmark}
+                  style={{ color: "#536471" }}
+                  onClick={handleDelete}
+                />
+              </div>
+            )}
         </div>
       </div>
     </div>

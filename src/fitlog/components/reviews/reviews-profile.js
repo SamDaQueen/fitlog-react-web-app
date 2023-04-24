@@ -10,7 +10,7 @@ const ReviewsProfile = ({ reviews }) => {
           <div key={review._id}>
             <Link
               key={review._id}
-              to={"/details/" + review.exerciseId}
+              to={"/details/" + review.exerciseId._id}
               className="list-group-item"
             >
               <ReviewCard review={review} page="profile" />

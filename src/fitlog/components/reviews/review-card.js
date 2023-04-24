@@ -3,9 +3,14 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteReviewThunk } from "../../../services/reviews/reviews-thunks";
+import { useParams } from "react-router-dom";
+import {
+  deleteReviewThunk,
+  findReviewsByExerciseIdThunk,
+} from "../../../services/reviews/reviews-thunks";
 
 const ReviewCard = ({ review, page }) => {
+  const { id } = useParams();
   const dateObj = new Date(review.date);
   const dispatch = useDispatch();
 
@@ -15,15 +20,16 @@ const ReviewCard = ({ review, page }) => {
     admin = currentUser.role === "ADMIN";
   }
 
-  const handleDelete = (event) => {
+  const handleDelete = async (event) => {
     event.preventDefault();
     console.log("delete");
-    dispatch(deleteReviewThunk(review._id));
+    await dispatch(deleteReviewThunk(review._id));
+    await dispatch(findReviewsByExerciseIdThunk(id));
   };
 
   return (
     <div className="row">
-      {page === "profile" && <div>{review.exerciseId}</div>}
+      {page === "profile" && <div>{review.exerciseId.name}</div>}
       <div className="col-sm-4 col-md-3 stars">
         {[...Array(review.rating)].map((star, i) => {
           return <FontAwesomeIcon key={i} icon={faStar}></FontAwesomeIcon>;
@@ -41,15 +47,17 @@ const ReviewCard = ({ review, page }) => {
           })}
         </span>
       </div>
-      {page !== "profile" && admin && (
-        <div className="col-1">
-          <FontAwesomeIcon
-            icon={faXmark}
-            style={{ color: "#536471" }}
-            onClick={handleDelete}
-          />
-        </div>
-      )}
+      {page !== "profile" &&
+        (admin ||
+          (currentUser && review.username === currentUser.username)) && (
+          <div className="col-1">
+            <FontAwesomeIcon
+              icon={faXmark}
+              style={{ color: "#536471" }}
+              onClick={handleDelete}
+            />
+          </div>
+        )}
     </div>
   );
 };

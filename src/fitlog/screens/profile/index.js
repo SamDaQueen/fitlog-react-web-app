@@ -233,7 +233,9 @@ const ProfileScreen = () => {
           <ReviewsProfile reviews={reviews} />
           <h2 className="mt-5">Recent Activities</h2>
           {activities &&
-            activities.map((activity) => <ActivityCard activity={activity} />)}
+            activities.map((activity) => (
+              <ActivityCard activity={activity} page={"profile"} />
+            ))}
         </div>
       </div>
     </>

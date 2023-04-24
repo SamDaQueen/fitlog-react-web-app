@@ -12,7 +12,9 @@ const HeroComponent = () => {
           <div className="col-md-6">
             {!currentUser && <h1>Get Fit and Stay Healthy</h1>}
             {currentUser && <h1>Welcome {currentUser.firstName}!</h1>}
-            <p>Plan your workouts and achieve your fitness goals with FitLog</p>
+            <h5>
+              Plan your workouts and achieve your fitness goals with FitLog
+            </h5>
           </div>
           <div className="col-md-6">
             <img src={heroImage} alt="FitLog Hero" className="img-fluid" />
