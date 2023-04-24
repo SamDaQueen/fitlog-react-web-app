@@ -130,12 +130,14 @@ const ProfileScreen = () => {
                         <span className="fw-bold">Role: </span>
                         {profile.role}
                       </div>
-                      <Link to={`/profile/${selectedTrainer}`}>
-                        <div className="text-muted">
-                          <span className="fw-bold">Trainer: </span>
-                          {selectedTrainer || "None"}
-                        </div>
-                      </Link>
+                      {profile.role === "USER" && (
+                        <Link to={`/profile/${selectedTrainer}`}>
+                          <div className="text-muted">
+                            <span className="fw-bold">Trainer: </span>
+                            {selectedTrainer || "None"}
+                          </div>
+                        </Link>
+                      )}
                     </>
                   )}
                   {profile.birthdate && (
