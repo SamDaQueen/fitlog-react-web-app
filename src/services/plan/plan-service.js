@@ -4,13 +4,20 @@ import { createExercise } from "../exercises/exercises-service";
 const USERS_API = "http://localhost:4000/api/users";
 
 export const addToPlan = async (userId, exerciseDetails) => {
-  const image = exerciseDetails.images[0] ? exerciseDetails.images[0] : "";
+  const image =
+    exerciseDetails.image && exerciseDetails.images[0]
+      ? exerciseDetails.images[0]
+      : "";
   await createExercise({
     _id: exerciseDetails.id,
     name: exerciseDetails.name,
     category: exerciseDetails.category,
     image: image,
   });
+  const check = await findPlanByUserAndExercise(userId, exerciseDetails.id);
+  if (check) {
+    return check;
+  }
   const response = await axios.post(
     `${USERS_API}/${userId}/add/${exerciseDetails.id}`
   );

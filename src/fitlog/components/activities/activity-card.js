@@ -74,7 +74,7 @@ const ActivityCard = ({ activity: { message, username, date, _id } }) => {
               />
             </button>
           </div>
-          {admin && (
+          {(admin || (currentUser && username === currentUser.username)) && (
             <div className="col-1">
               <FontAwesomeIcon
                 icon={faXmark}

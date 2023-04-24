@@ -9,10 +9,11 @@ import {
   deleteFromPlan,
   findPlanByUserAndExercise,
 } from "../../../services/plan/plan-service";
-import { profileThunk } from "../../../services/users/users-thunks";
+import { findAllUsersByTrainerId } from "../../../services/trainers/trainer-service";
 import ReviewsComponent from "../../components/reviews";
 import UsersList from "../../components/users-list";
 import AddComponent from "./add";
+import AddForUser from "./add-for-user";
 import DeleteComponent from "./delete";
 import "./index.css";
 
@@ -20,6 +21,8 @@ const DetailsScreen = () => {
   const { id } = useParams();
   const [details, setDetails] = useState([]);
   const [inPlan, setInPlan] = useState(false);
+
+  const [users, setUsers] = useState([]);
 
   const navigate = useNavigate();
 
@@ -37,13 +40,18 @@ const DetailsScreen = () => {
     }
   };
 
+  const fetchUsers = async () => {
+    const users = await findAllUsersByTrainerId(currentUser._id);
+    setUsers(users);
+  };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(profileThunk());
     loadScreen();
     checkIfInPlan();
-  }, [inPlan, dispatch]);
+    fetchUsers();
+  }, [inPlan, dispatch, currentUser]);
 
   const handleBack = () => navigate(-1);
 
@@ -149,6 +157,13 @@ const DetailsScreen = () => {
             </div>
             <div className="d-none d-lg-block col-lg-4">
               <UsersList id={id} />
+              {currentUser && currentUser.role === "TRAINER" && (
+                <AddForUser
+                  currentUser={currentUser}
+                  users={users}
+                  details={details}
+                />
+              )}
             </div>
           </div>
         </div>

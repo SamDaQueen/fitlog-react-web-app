@@ -7,7 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { findExercisesByUserId } from "../../../services/plan/plan-service";
 import { findReviewsByUsername } from "../../../services/reviews/reviews-service";
-import { findTrainerByUserId } from "../../../services/trainers/trainer-service";
+import {
+  findAllUsersByTrainerId,
+  findTrainerByUserId,
+} from "../../../services/trainers/trainer-service";
 import { findUserByUsername } from "../../../services/users/users-service";
 import { deleteUserThunk } from "../../../services/users/users-thunks";
 import MyPlanComponent from "../../components/my-plan";
@@ -22,6 +25,7 @@ const ProfileScreen = () => {
   const [exercises, setExercises] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [selectedTrainer, setSelectedTrainer] = useState("");
+  const [users, setUsers] = useState([]);
 
   let admin = false;
   if (currentUser) {
@@ -55,6 +59,11 @@ const ProfileScreen = () => {
     setSelectedTrainer(trainer.trainerId.username);
   };
 
+  const fetchUsers = async () => {
+    const users = await findAllUsersByTrainerId(currentUser._id);
+    setUsers(users);
+  };
+
   const loadProfile = async () => {
     if (username) {
       await fetchUserProfile();
@@ -64,7 +73,12 @@ const ProfileScreen = () => {
     }
     await findPlansForUser(profile._id);
     await findReviewsForUser(profile.username);
-    await findTrainer();
+    if (currentUser && currentUser.role === "TRAINER") {
+      await fetchUsers();
+    }
+    if (currentUser && currentUser.role === "USER") {
+      await findTrainer();
+    }
   };
 
   useEffect(() => {
@@ -179,6 +193,24 @@ const ProfileScreen = () => {
                     </div>
                   </>
                 )}
+              </div>
+            </div>
+          )}
+          {profile && profile.role === "TRAINER" && (
+            <div className="card rounded-1 mt-3">
+              <div className="card-header">
+                <h5 className="mb-0">
+                  Your Assigned Users (Contact admin to change assignment)
+                </h5>
+              </div>
+              <div className="list-group">
+                {users.map((user) => (
+                  <Link to={`/profile/${user.username}`}>
+                    <li className="list-group-item">
+                      {user.firstName} {user.lastName}
+                    </li>
+                  </Link>
+                ))}
               </div>
             </div>
           )}
