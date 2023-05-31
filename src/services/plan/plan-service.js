@@ -1,7 +1,8 @@
 import axios from "axios";
 import { createExercise } from "../exercises/exercises-service";
 
-const USERS_API = "http://localhost:4000/api/users";
+const API_BASE = process.env.REACT_APP_API_BASE;
+const USERS_API = `${API_BASE}/users`;
 
 export const addToPlan = async (userId, exerciseDetails) => {
   const image =

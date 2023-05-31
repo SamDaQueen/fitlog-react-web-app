@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const ACTIVITIES_API = "http://localhost:4000/api/activities";
-const USERS_API = "http://localhost:4000/api/users";
+const API_BASE = process.env.REACT_APP_API_BASE;
+const ACTIVITIES_API = `${API_BASE}/activities`;
+const USERS_API = `${API_BASE}/users`;
 
 export const createActivity = async (activity) => {
   const response = await axios.post(ACTIVITIES_API, activity);

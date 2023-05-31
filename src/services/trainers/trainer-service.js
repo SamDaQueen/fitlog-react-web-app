@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const TRAINERS_API_URL = "http://localhost:4000/api/trainers";
+const API_BASE = process.env.REACT_APP_API_BASE;
+const TRAINERS_API_URL = `${API_BASE}/trainers`;
 
 export const findAllUsersByTrainerId = async (trainerId) => {
   const response = await axios.get(`${TRAINERS_API_URL}/${trainerId}`);
@@ -33,4 +34,3 @@ export const deleteTrainerUserByTrainerId = async (trainerId) => {
   );
   return response.data;
 };
-
