@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const EXERCISE_API = process.env.REACT_APP_EXERCISE_API;
+const EXERCISE_SEARCH_API = process.env.REACT_APP_EXERCISE_SEARCH_API;
 const IMAGE_API = "https://wger.de/";
 
 const API_BASE = process.env.REACT_APP_API_BASE;
@@ -31,7 +32,7 @@ export const findExercises = async () => {
 };
 
 export const findExerciseById = async (id) => {
-  const response = await axios.get(`${EXERCISE_API}/${id}`);
+  const response = await axios.get(`${EXERCISE_API}${id}`);
   const result = response.data;
   return {
     id: result.id,
@@ -52,7 +53,7 @@ export const findExerciseById = async (id) => {
 };
 
 export const findExercisesByTerm = async (term) => {
-  const request = `${EXERCISE_API}search/?term=${term}`;
+  const request = `${EXERCISE_SEARCH_API}?term=${term}`;
   const response = await axios.get(request);
 
   return response.data.suggestions.map((suggestion) => {
