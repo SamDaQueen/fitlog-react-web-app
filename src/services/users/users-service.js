@@ -40,17 +40,17 @@ export const deleteUser = (id) => {
 };
 
 export const login = (user) => {
-  return api.post(`${USERS_API_URL}/login`, user);
+  return api.post(`${USERS_API_URL}/login`, user, {withCredentials: true});
 };
 
 export const logout = () => {
-  return api.post(`${USERS_API_URL}/logout`);
+  return api.post(`${USERS_API_URL}/logout`, {}, {withCredentials: true});
 };
 
 export const register = (user) => {
-  return api.post(`${USERS_API_URL}/register`, user);
+  return api.post(`${USERS_API_URL}/register`, user, {withCredentials: true});
 };
 
 export const profile = () => {
-  return api.get(`${USERS_API_URL}/profile`);
+  return api.get(`${USERS_API_URL}/profile`, {withCredentials: true});
 };
