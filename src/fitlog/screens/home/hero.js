@@ -16,7 +16,7 @@ const HeroComponent = () => {
               Plan your workouts and achieve your fitness goals with FitLog
             </h5>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 p-0">
             <img src={heroImage} alt="FitLog Hero" className="img-fluid" />
           </div>
         </div>

@@ -190,19 +190,20 @@ const ProfileScreen = () => {
                   <>
                     <div className="col-4">
                       <Link to={editPath}>
-                        <h3 className="btn btn-primary float-end mb-5">
+                        <button className="btn btn-primary float-end mb-5">
                           <FontAwesomeIcon className="me-2" icon={faPencil} />
                           Edit Profile
-                        </h3>
+                        </button>
                       </Link>
 
-                      <h3
-                        className="btn btn-danger float-end"
+
+                      <button
+                        className="btn btn-dark float-end"
                         onClick={handleDelete}
                       >
                         <FontAwesomeIcon className="me-2" icon={faXmark} />
                         Delete Profile
-                      </h3>
+                      </button>
                     </div>
                   </>
                 )}
