@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_BASE = process.env.REACT_APP_API_BASE;
-const REVIEWS_API_URL = `${API_BASE}/reviews`;
+const REVIEWS_API_URL = `${API_BASE}/exercises/reviews`;
 const USERS_API_URL = `${API_BASE}/users`;
 
 export const createReview = (review) => axios.post(REVIEWS_API_URL, review);
