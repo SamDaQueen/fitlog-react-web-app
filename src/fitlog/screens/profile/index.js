@@ -200,7 +200,7 @@ const ProfileScreen = () => {
                         onClick={handleDelete}
                       >
                         <FontAwesomeIcon className="me-2" icon={faXmark} />
-                        Delete Profile
+                        Delete
                       </button>
                     </div>
                   </>
@@ -212,7 +212,8 @@ const ProfileScreen = () => {
             <div className="card rounded-1 mt-3">
               <div className="card-header">
                 <h5 className="mb-0">
-                  Assigned Users (Contact admin to change assignment)
+                  Assigned Users{" "}
+                  {currentUser && <>(Contact admin to change assignment)</>}
                 </h5>
               </div>
               <div className="list-group">

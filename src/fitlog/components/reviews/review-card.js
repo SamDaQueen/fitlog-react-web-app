@@ -29,12 +29,12 @@ const ReviewCard = ({ review, page }) => {
   return (
     <div className="row">
       {page === "profile" && <div>{review.exerciseId.name}</div>}
-      <div className="col-sm-4 col-md-3 stars">
+      <div className="col-sm-5 col-md-4 stars">
         {[...Array(review.rating)].map((star, i) => {
           return <FontAwesomeIcon key={i} icon={faStar}></FontAwesomeIcon>;
         })}
       </div>
-      <div className="col-sm-7 col-md-8">
+      <div className="col-sm-6 col-md-87">
         {review.review} {page !== "profile" && `(${review.username})`}{" "}
         <span className="d-none d-md-inline text-muted">
           {dateObj.toLocaleString("en-US", {
