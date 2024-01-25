@@ -1,0 +1,12 @@
+.pagination-container {
+    display: flex;
+    justify-content: center;
+  }
+
+.break-me {
+    padding: 0px 10px 0px 10px;
+    font-size: 18px;
+    color: #333;
+    border: 1px solid #ccc;
+  }
+  

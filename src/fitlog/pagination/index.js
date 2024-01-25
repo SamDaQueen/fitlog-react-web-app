@@ -1,49 +1,50 @@
-import { Pagination } from "react-bootstrap";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import ReactPaginate from "react-paginate";
+import "./pagination.css";
 
 const PaginationComponent = ({ count, page, handlePageChange }) => {
-  console.log("page and count", page, count);
+  const itemsPerPage = 10;
 
-  const itemsPerPage = 20;
-  const startPage = Math.floor((page - 1) / itemsPerPage) * itemsPerPage + 1;
+  const handlePageClick = (data) => {
+    const selectedPage = data.selected + 1;
+    handlePageChange(selectedPage);
+  };
 
   const totalPages = Math.ceil(count / itemsPerPage);
 
-  const pageNumbers = Array.from(
-    { length: Math.min(itemsPerPage, totalPages) },
-    (_, i) => startPage + i
-  );
-
-  console.log("pageNumbers", pageNumbers);
-
   return (
-    <Pagination className="justify-content-center">
-      <Pagination.Prev
-        disabled={page === 1}
-        onClick={() => {
-          handlePageChange(page - 1);
-        }}
+    <div className="pagination-container">
+      <ReactPaginate
+        forcePage={page - 1}
+        previousLabel={
+          <FontAwesomeIcon icon={faChevronLeft} style={{ fontSize: 18 }} />
+        }
+        nextLabel={
+          <FontAwesomeIcon icon={faChevronRight} style={{ fontSize: 18 }} />
+        }
+        breakLabel={"..."}
+        breakClassName={"break-me"}
+        pageCount={totalPages}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={4}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination"}
+        subContainerClassName={"pages pagination"}
+        activeClassName={"active"}
+        pageClassName={"page-item"}
+        pageLinkClassName={"page-link"}
+        previousClassName={"page-item"}
+        previousLinkClassName={"page-link"}
+        nextClassName={"page-item"}
+        nextLinkClassName={"page-link"}
       />
-      <Pagination.Item active>{page}</Pagination.Item>
-
-      {pageNumbers.map((pageNumber) => (
-        <Pagination.Item
-          key={pageNumber}
-          active={page === pageNumber}
-          onClick={() => {
-            handlePageChange(pageNumber);
-          }}
-        >
-          {pageNumber}
-        </Pagination.Item>
-      ))}
-
-      <Pagination.Next
-        disabled={count === 0 || page === totalPages}
-        onClick={() => {
-          handlePageChange(page + 1);
-        }}
-      />
-    </Pagination>
+    </div>
   );
 };
+
 export default PaginationComponent;

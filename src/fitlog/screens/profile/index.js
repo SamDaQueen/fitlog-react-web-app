@@ -66,7 +66,6 @@ const ProfileScreen = () => {
 
   const findTrainer = async () => {
     const trainer = await findTrainerByUserId(profile._id);
-    console.log(trainer.trainerId);
     setSelectedTrainer(trainer.trainerId.username);
   };
 
@@ -196,7 +195,6 @@ const ProfileScreen = () => {
                         </button>
                       </Link>
 
-
                       <button
                         className="btn btn-dark float-end"
                         onClick={handleDelete}
@@ -235,10 +233,10 @@ const ProfileScreen = () => {
           <h2 className="mt-5">Recent Activities</h2>
           {activities &&
             activities
-            .sort((a, b) => (a.date < b.date ? 1 : -1))
-            .map((activity) => (
-              <ActivityCard activity={activity} page={"profile"} />
-            ))}
+              .sort((a, b) => (a.date < b.date ? 1 : -1))
+              .map((activity) => (
+                <ActivityCard activity={activity} page={"profile"} />
+              ))}
         </div>
       </div>
     </>

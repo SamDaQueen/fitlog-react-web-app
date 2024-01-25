@@ -20,11 +20,10 @@ const ReviewCard = ({ review, page }) => {
     admin = currentUser.role === "ADMIN";
   }
 
-  const handleDelete = async (event) => {
+  const handleDelete = (event) => {
     event.preventDefault();
-    console.log("delete");
-    await dispatch(deleteReviewThunk(review._id));
-    await dispatch(findReviewsByExerciseIdThunk(id));
+    dispatch(deleteReviewThunk(review._id));
+    dispatch(findReviewsByExerciseIdThunk(id));
   };
 
   return (

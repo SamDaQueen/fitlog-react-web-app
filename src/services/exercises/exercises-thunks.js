@@ -3,7 +3,7 @@ import * as service from "./exercises-service.js";
 
 export const findExercisesThunk = createAsyncThunk(
   "exercises/findExercises",
-  async () => await service.findExercises()
+  async (offset) => await service.findExercises(offset)
 );
 
 export const findExercisesByTermThunk = createAsyncThunk(

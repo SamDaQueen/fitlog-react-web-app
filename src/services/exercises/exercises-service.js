@@ -7,14 +7,13 @@ const IMAGE_API = "https://wger.de/";
 const API_BASE = process.env.REACT_APP_API_BASE;
 const SAVED_EXERCISES_API = `${API_BASE}/exercises`;
 
-export const findExercises = async () => {
-  const response = await axios.get(EXERCISE_API);
+export const findExercises = async (offset) => {
+  const response = await axios.get(`${EXERCISE_API}?limit=10&offset=${offset}`);
   return {
     count: response.data.count,
     next: response.data.next,
     previous: response.data.previous,
-    data: response.data.results
-    .map((result) => {
+    data: response.data.results.map((result) => {
       let imageUrl =
         result.images.length && result.images[0].image
           ? result.images[0].image

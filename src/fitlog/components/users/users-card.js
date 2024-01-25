@@ -17,14 +17,12 @@ const UserCard = ({ user, trainers }) => {
       setSelectedTrainer("");
       return;
     }
-    console.log(trainerId);
     setSelectedTrainer(trainerId);
     await createTrainerUser({ userId: user._id, trainerId });
   };
 
   const findTrainer = async () => {
     const trainer = await findTrainerByUserId(user._id);
-    console.log(trainer.trainerId);
     setSelectedTrainer(trainer.trainerId._id);
   };
 

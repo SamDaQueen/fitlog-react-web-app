@@ -16,11 +16,10 @@ const ActivityCard = ({ activity: { message, username, date, _id }, page }) => {
 
   const dispatch = useDispatch();
 
-  const handleDelete = async (event) => {
+  const handleDelete = (event) => {
     event.preventDefault();
-    console.log("delete");
-    await dispatch(deleteActivityThunk(_id));
-    await dispatch(findAllActivitiesThunk());
+    dispatch(deleteActivityThunk(_id));
+    dispatch(findAllActivitiesThunk());
   };
 
   const dateObj = new Date(date);

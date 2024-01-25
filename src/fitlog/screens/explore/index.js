@@ -13,21 +13,22 @@ const ExploreScreen = () => {
   const navigate = useNavigate();
   const { searchTerm } = useParams();
 
-  const [search, setSearch] = useState(searchTerm || "");
+  const [search, setSearch] = useState(searchTerm);
+  const page = parseInt(sessionStorage.getItem("page")) || 1;
 
   useEffect(() => {
     if (searchTerm) {
       handleSearch();
     } else {
-      dispatch(findExercisesThunk());
+      const offset = (page - 1) * 10;
+      dispatch(findExercisesThunk(offset));
     }
-  }, [dispatch, searchTerm]);
+  }, [searchTerm]);
 
   const handleSearch = () => {
-    sessionStorage.setItem("page", "1");
     if (!search || search === "") {
-      navigate(`/search`);
-      dispatch(findExercisesThunk());
+      navigate("/search");
+      dispatch(findExercisesThunk(0));
       return;
     }
     navigate(`/search/${search}`);
@@ -47,7 +48,7 @@ const ExploreScreen = () => {
             setSearch={setSearch}
             handleSearch={handleSearch}
           />
-          <ExerciseList />
+          <ExerciseList search={search} />
         </div>
       </div>
     </>

@@ -13,8 +13,6 @@ const EditProfile = () => {
   const { username } = useParams();
   const { currentUser } = useSelector((state) => state.users);
 
-  console.log(currentUser);
-
   const [profile, setProfile] = useState(currentUser);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
