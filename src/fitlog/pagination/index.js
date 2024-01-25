@@ -7,9 +7,12 @@ import React from "react";
 import ReactPaginate from "react-paginate";
 import "./pagination.css";
 
-const PaginationComponent = ({ count, page, handlePageChange }) => {
-  const itemsPerPage = 10;
-
+const PaginationComponent = ({
+  count,
+  page,
+  itemsPerPage,
+  handlePageChange,
+}) => {
   const handlePageClick = (data) => {
     const selectedPage = data.selected + 1;
     handlePageChange(selectedPage);

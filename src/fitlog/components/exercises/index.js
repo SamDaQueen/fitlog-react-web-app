@@ -16,8 +16,10 @@ const ExerciseList = ({ search }) => {
 
   const dispatch = useDispatch();
 
+  const itemsPerPage = 10;
+
   const updatePage = (page) => {
-    const offset = (page - 1) * 10;
+    const offset = (page - 1) * itemsPerPage;
     dispatch(findExercisesThunk(offset));
   };
 
@@ -38,6 +40,7 @@ const ExerciseList = ({ search }) => {
         <PaginationComponent
           count={count}
           page={page}
+          itemsPerPage={itemsPerPage}
           handlePageChange={handlePageChange}
         />
       )}
