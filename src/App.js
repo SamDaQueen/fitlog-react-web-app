@@ -6,7 +6,7 @@ import FitLog from "./fitlog";
 function App() {
   return (
     <BrowserRouter>
-      <div className="container">
+      <div>
         <Routes>
           <Route path="/*" element={<FitLog />}></Route>
         </Routes>

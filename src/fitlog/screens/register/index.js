@@ -168,26 +168,8 @@ const RegisterScreen = () => {
                               Trainer
                             </label>
                           </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="role"
-                              id="adminRole"
-                              value="ADMIN"
-                              checked={role === "ADMIN"}
-                              onChange={(e) => setRole(e.target.value)}
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="adminRole"
-                            >
-                              Admin
-                            </label>
-                          </div>
                         </div>
                       </div>
-
                       <div className="form-group">
                         <label htmlFor="birthdate" className="fw-bold">
                           Birthdate

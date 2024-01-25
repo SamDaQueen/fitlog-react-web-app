@@ -17,8 +17,9 @@ const FitLog = () => {
   return (
     <Provider store={store}>
       <CurrentUserContext>
+      <Header />
+      <div className="container">
         <div className="row">
-          <Header />
           <div className="col-2">
             <NavigationBar />
           </div>
@@ -37,6 +38,7 @@ const FitLog = () => {
               <Route path="edit-profile" element={<EditProfile />} />
               <Route path="edit-profile/:username" element={<EditProfile />} />
             </Routes>
+          </div>
           </div>
         </div>
       </CurrentUserContext>

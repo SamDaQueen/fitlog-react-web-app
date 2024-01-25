@@ -234,7 +234,9 @@ const ProfileScreen = () => {
           <ReviewsProfile reviews={reviews} />
           <h2 className="mt-5">Recent Activities</h2>
           {activities &&
-            activities.map((activity) => (
+            activities
+            .sort((a, b) => (a.date < b.date ? 1 : -1))
+            .map((activity) => (
               <ActivityCard activity={activity} page={"profile"} />
             ))}
         </div>

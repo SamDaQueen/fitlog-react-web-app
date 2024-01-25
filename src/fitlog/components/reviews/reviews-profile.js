@@ -6,7 +6,9 @@ const ReviewsProfile = ({ reviews }) => {
     <>
       <h2>Reviews</h2>
       <div className="list-group">
-        {reviews.map((review) => (
+        {reviews
+        .sort((a, b) => (a.date < b.date ? 1 : -1))
+        .map((review) => (
           <div key={review._id}>
             <Link
               key={review._id}
