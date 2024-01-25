@@ -1,6 +1,20 @@
 import { Pagination } from "react-bootstrap";
 
-const PaginationComponent = ({ workouts, page, handlePageChange }) => {
+const PaginationComponent = ({ count, page, handlePageChange }) => {
+  console.log("page and count", page, count);
+
+  const itemsPerPage = 20;
+  const startPage = Math.floor((page - 1) / itemsPerPage) * itemsPerPage + 1;
+
+  const totalPages = Math.ceil(count / itemsPerPage);
+
+  const pageNumbers = Array.from(
+    { length: Math.min(itemsPerPage, totalPages) },
+    (_, i) => startPage + i
+  );
+
+  console.log("pageNumbers", pageNumbers);
+
   return (
     <Pagination className="justify-content-center">
       <Pagination.Prev
@@ -10,25 +24,21 @@ const PaginationComponent = ({ workouts, page, handlePageChange }) => {
         }}
       />
       <Pagination.Item active>{page}</Pagination.Item>
-      {workouts.length > 0 &&
-        Array.from(
-          { length: Math.ceil(workouts[0].count / 10) - 1 },
-          (_, i) => (
-            <Pagination.Item
-              key={i + 2}
-              active={page === i + 2}
-              onClick={() => {
-                handlePageChange(i + 2);
-              }}
-            >
-              {i + 2}
-            </Pagination.Item>
-          )
-        )}
+
+      {pageNumbers.map((pageNumber) => (
+        <Pagination.Item
+          key={pageNumber}
+          active={page === pageNumber}
+          onClick={() => {
+            handlePageChange(pageNumber);
+          }}
+        >
+          {pageNumber}
+        </Pagination.Item>
+      ))}
+
       <Pagination.Next
-        disabled={
-          workouts.length === 0 || page === Math.ceil(workouts[0].count / 10)
-        }
+        disabled={count === 0 || page === totalPages}
         onClick={() => {
           handlePageChange(page + 1);
         }}

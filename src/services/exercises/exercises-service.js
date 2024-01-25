@@ -14,7 +14,6 @@ export const findExercises = async () => {
     next: response.data.next,
     previous: response.data.previous,
     data: response.data.results
-    .filter((result) => result.language?.id == 2)
     .map((result) => {
       let imageUrl =
         result.images.length && result.images[0].image
