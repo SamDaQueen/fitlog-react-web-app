@@ -27,8 +27,8 @@ const NavigationBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    await dispatch(logoutThunk());
+  const handleLogout = () => {
+    dispatch(logoutThunk());
     navigate("/login");
   };
 

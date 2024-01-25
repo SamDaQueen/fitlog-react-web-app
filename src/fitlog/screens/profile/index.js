@@ -112,7 +112,7 @@ const ProfileScreen = () => {
       "Are you sure you want to delete this account?"
     );
     if (confirmDelete) {
-      await dispatch(deleteUserThunk(profile._id));
+      dispatch(deleteUserThunk(profile._id));
       navigate("/home");
     }
   };

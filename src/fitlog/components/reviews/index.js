@@ -19,8 +19,8 @@ const ReviewsComponent = () => {
 
   const dispatch = useDispatch();
 
-  const loadReviews = async () => {
-    await dispatch(findReviewsByExerciseIdThunk(id));
+  const loadReviews = () => {
+    dispatch(findReviewsByExerciseIdThunk(id));
   };
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const ReviewsComponent = () => {
     setReview(event.target.value);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const newReview = {
       rating: rating,
@@ -41,7 +41,7 @@ const ReviewsComponent = () => {
       date: new Date().getTime(),
     };
 
-    await dispatch(createReviewThunk(newReview));
+    dispatch(createReviewThunk(newReview));
     setReview("");
     setRating(0);
   };

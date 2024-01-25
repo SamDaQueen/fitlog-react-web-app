@@ -6,7 +6,7 @@ const NewActivityComponent = () => {
   let [activity, setActivity] = useState("");
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.users);
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (activity === "") {
       return;
     }
@@ -16,7 +16,7 @@ const NewActivityComponent = () => {
       date: new Date().getTime(),
     };
     setActivity("");
-    await dispatch(createActivityThunk(newActivity));
+    dispatch(createActivityThunk(newActivity));
   };
 
   return (

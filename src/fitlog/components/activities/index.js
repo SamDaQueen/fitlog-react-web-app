@@ -11,8 +11,8 @@ const ActivityList = () => {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.users);
 
-  const loadActivities = async () => {
-    await dispatch(findAllActivitiesThunk());
+  const loadActivities = () => {
+    dispatch(findAllActivitiesThunk());
   };
 
   useEffect(() => {

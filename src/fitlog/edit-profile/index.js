@@ -52,9 +52,9 @@ const EditProfile = () => {
     fetchUserProfile();
   }, [dispatch, currentUser, username]);
 
-  const handleUpdate = async (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
-    await dispatch(
+    dispatch(
       updateUserThunk({
         ...profile,
         password: password,
@@ -67,7 +67,7 @@ const EditProfile = () => {
     if (username) {
       navigate(`/profile/${username}`);
     } else {
-      await dispatch(profileThunk());
+      dispatch(profileThunk());
       navigate("/profile");
     }
   };
