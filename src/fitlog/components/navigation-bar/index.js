@@ -36,19 +36,21 @@ const NavigationBar = () => {
     <div className="list-group">
       <Link
         to={"/home"}
-        className={`list-group-item ${
+        className={`list-group-item ps-2 pe-4 p-md-2 ps-lg-3 ${
           active === "home" || active === "fitlog" || active === undefined
             ? "active"
             : ""
         }`}
       >
-        <FontAwesomeIcon icon={faHouseFire} className="me-2 ms-sm-0" />
+        <FontAwesomeIcon icon={faHouseFire} className="me-2" />
         <span className="d-none d-lg-inline">Home</span>
       </Link>
 
       <Link
         to={"/search"}
-        className={`list-group-item ${active === "search" ? "active" : ""}`}
+        className={`list-group-item ps-2 pe-4 p-md-2 ps-lg-3 ${
+          active === "search" ? "active" : ""
+        }`}
       >
         <FontAwesomeIcon icon={faDumbbell} className="me-2" />
         <span className="d-none d-lg-inline">Explore</span>
@@ -68,7 +70,9 @@ const NavigationBar = () => {
           {admin && (
             <Link
               to={"/users"}
-              className={`list-group-item ${active === "users" ? "active" : ""}
+              className={`list-group-item ps-2 pe-4 p-md-2 ps-lg-3 ${
+                active === "users" ? "active" : ""
+              }
                     `}
             >
               <FontAwesomeIcon icon={faUsers} className="me-2" />
@@ -78,7 +82,7 @@ const NavigationBar = () => {
           <Link
             to={"/login"}
             onClick={handleLogout}
-            className="list-group-item"
+            className="list-group-item ps-2 pe-4 p-md-2 ps-lg-3"
           >
             <FontAwesomeIcon icon={faArrowRightFromBracket} className="me-2" />
             <span className="d-none d-lg-inline">Logout</span>
@@ -90,7 +94,9 @@ const NavigationBar = () => {
         <>
           <Link
             to={"/login"}
-            className={`list-group-item ${active === "login" ? "active" : ""}`}
+            className={`list-group-item ps-2 pe-4 p-md-2 ps-lg-3 ${
+              active === "login" ? "active" : ""
+            }`}
           >
             <FontAwesomeIcon icon={faArrowRightToBracket} className="me-2" />
             <span className="d-none d-lg-inline">Login</span>
@@ -98,7 +104,7 @@ const NavigationBar = () => {
 
           <Link
             to={"/register"}
-            className={`list-group-item ${
+            className={`list-group-item ps-2 pe-4 p-md-2 ps-lg-3 ${
               active === "register" ? "active" : ""
             }`}
           >

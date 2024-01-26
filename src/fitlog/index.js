@@ -17,28 +17,31 @@ const FitLog = () => {
   return (
     <Provider store={store}>
       <CurrentUserContext>
-      <Header />
-      <div className="container">
-        <div className="row">
-          <div className="col-2">
-            <NavigationBar />
-          </div>
-          <div className="col-10">
-            <Routes>
-              <Route path="/" element={<HomeScreen />} />
-              <Route path="home" element={<HomeScreen />} />
-              <Route path="search" element={<ExploreScreen />} />
-              <Route path="details/:id" element={<DetailsScreen />} />
-              <Route path="search/:searchTerm" element={<ExploreScreen />} />
-              <Route path="profile" element={<ProfileScreen />} />
-              <Route path="profile/:username" element={<ProfileScreen />} />
-              <Route path="users" element={<UsersScreen />} />
-              <Route path="login" element={<LoginScreen />} />
-              <Route path="register" element={<RegisterScreen />} />
-              <Route path="edit-profile" element={<EditProfile />} />
-              <Route path="edit-profile/:username" element={<EditProfile />} />
-            </Routes>
-          </div>
+        <Header />
+        <div className="container">
+          <div className="row">
+            <div className="col-1 col-lg-2">
+              <NavigationBar />
+            </div>
+            <div className="col-11 col-lg-10 ps-5 ps-lg-1">
+              <Routes>
+                <Route path="/" element={<HomeScreen />} />
+                <Route path="home" element={<HomeScreen />} />
+                <Route path="search" element={<ExploreScreen />} />
+                <Route path="details/:id" element={<DetailsScreen />} />
+                <Route path="search/:searchTerm" element={<ExploreScreen />} />
+                <Route path="profile" element={<ProfileScreen />} />
+                <Route path="profile/:username" element={<ProfileScreen />} />
+                <Route path="users" element={<UsersScreen />} />
+                <Route path="login" element={<LoginScreen />} />
+                <Route path="register" element={<RegisterScreen />} />
+                <Route path="edit-profile" element={<EditProfile />} />
+                <Route
+                  path="edit-profile/:username"
+                  element={<EditProfile />}
+                />
+              </Routes>
+            </div>
           </div>
         </div>
       </CurrentUserContext>
